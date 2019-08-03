@@ -1,0 +1,12 @@
+{
+    "name": "comment_system_with_githubissues_vue",
+    "title": "基于 Github Issues 和 vue 的评论组件",
+    "cover": "https://cdn.jsdelivr.net/gh/shalldie/static/blog/images/cover/Fjdy35WhvBTrR92.jpeg",
+    "publishTime": 1564833437496,
+    "labels": [
+        "javascript",
+        "comment",
+        "github",
+        "vue"
+    ]
+}
