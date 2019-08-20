@@ -1,8 +1,12 @@
 # vscode-background 背景插件
 
-[![Version](https://vsmarketplacebadge.apphb.com/version/shalldie.background.svg)](https://marketplace.visualstudio.com/items?itemName=shalldie.background)
-[![Installs](https://vsmarketplacebadge.apphb.com/installs/shalldie.background.svg)](https://marketplace.visualstudio.com/items?itemName=shalldie.background)
-[![Ratings](https://vsmarketplacebadge.apphb.com/rating/shalldie.background.svg)](https://vsmarketplacebadge.apphb.com/rating/shalldie.background.svg)
+<a href="https://marketplace.visualstudio.com/items?itemName=shalldie.background"><img class="ignore" src="https://vsmarketplacebadge.apphb.com/version/shalldie.background.svg"></a> <a href="https://marketplace.visualstudio.com/items?itemName=shalldie.background"><img class="ignore" src="https://vsmarketplacebadge.apphb.com/installs/shalldie.background.svg"></a> <a href="https://marketplace.visualstudio.com/items?itemName=shalldie.background"><img class="ignore" src="https://vsmarketplacebadge.apphb.com/rating/shalldie.background.svg"></a>
+
+这是 vscode 编辑器的一个 background 背景插件，用于修改 vscode 编辑器的背景。
+
+封面是网友送的，可爱死了 >\_<#@!
+
+![](https://cdn.jsdelivr.net/gh/shalldie/static/blog/images/cover/khvz5xA8W6HePmI.jpeg)
 
 ## Add a lovely background-image to your vscode.
 
@@ -12,7 +16,7 @@ Vscode Market: [https://marketplace.visualstudio.com/items?itemName=shalldie.bac
 
 ## It looks like:
 
-![](https://user-images.githubusercontent.com/9987486/40583705-7105dda8-61c6-11e8-935a-3c5d475a1eb1.gif)
+![](./assets/vscode.gif)
 
 ## Warns 警告：
 
@@ -22,11 +26,11 @@ Vscode Market: [https://marketplace.visualstudio.com/items?itemName=shalldie.bac
 > **This extension works by editting the vscode's css file.**
 > So, a information appears while the first time to install or vscode update.U can click the [never show again] to avoid it.
 
-![](https://user-images.githubusercontent.com/9987486/40583926-b1fb5398-61ca-11e8-8271-4ac650d158d3.png)
+![](./assets/broken.png)
 
 This is the reason:
 
-![](https://user-images.githubusercontent.com/9987486/40583775-91d4c8d6-61c7-11e8-9048-8c5538a32399.png)
+![](./assets/reason.png)
 
 ## Config 配置项
 
