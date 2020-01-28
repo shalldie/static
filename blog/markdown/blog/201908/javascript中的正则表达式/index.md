@@ -194,7 +194,7 @@ console.log(matches);
 
 exec 每次获取到到也是一个伪数组，额外还有 `index`，`input` 字段，`index`表示前一次匹配到的位置，`input`表示原始的字符串。
 
-之前写过一篇文章 [写一个 javascript 模板引擎](https://wqnmlgbd.net/blog/javascript_template_engine)，其中的匹配使用了 `exec` 方法，有兴趣可以移步。
+之前写过一篇文章 [写一个 javascript 模板引擎](https://wqnmlgbd.net/article/javascript_template_engine)，其中的匹配使用了 `exec` 方法，有兴趣可以移步。
 
 ## 一些使用情景
 
