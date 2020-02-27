@@ -16,7 +16,7 @@ Vscode Market: [https://marketplace.visualstudio.com/items?itemName=shalldie.bac
 
 ## It looks like:
 
-<img class="preview" src="./assets/vscode.gif">
+<img class="preview" src="./assets/vscode_min_233.gif">
 
 ## Warns 警告：
 
