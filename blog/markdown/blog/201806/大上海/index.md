@@ -12,7 +12,7 @@
 
 ## 苏州河畔
 
-<img src="./assets/szhp.jpg" style="max-width:600px;">
+<img class="preview" src="./assets/szhp.jpg">
 
 > 青旅总是有个一些有追求、有梦想的人，在吹牛逼
 
@@ -24,7 +24,7 @@
 
 住青旅的那几天，不择手段竭尽全力的到处跑着去面试。有转前端的想法，就投了 `.net` 跟 `前端` ， 一天要面 2 家吧，就这样跑了几天。
 
-<img src="./assets/gxms.jpg" style="max-width:600px;">
+<img class="preview" src="./assets/gxms.jpg">
 
 突然接到一个前端的面试 ，大鹅推的，花了一下午看切图视频...囧。 因为要的不多，所以很是拿了几个 offer，在廉价劳动力里面算是抢手的。比较了一哈薪资跟环境，选择了高欣。
 
@@ -32,7 +32,7 @@
 
 高欣、展盟、乐湃、嵩恒 那几个老板是一伙的...总之比较乱我到现在也没弄清楚。 大家在一起办公，签的合同是跟谁就不清楚了。
 
-<img src="./assets/gx.jpg" style="max-width:600px;">
+<img class="preview" src="./assets/gx.jpg">
 
 装修的很漂亮，表面工夫很不错。是的，忍不住涂了个槽 hh。
 
@@ -52,13 +52,13 @@
 
 每天都有摄影师在楼下比着夕阳拍照，废话不多说，上图。
 
-<img src="./assets/xc1.jpg" style="max-width:600px;">
+<img class="preview" src="./assets/xc1.jpg">
 
-<img src="./assets/xc2.jpg" style="max-width:600px;">
+<img class="preview" src="./assets/xc2.jpg">
 
-<img src="./assets/xc3.jpg" style="max-width:600px;">
+<img class="preview" src="./assets/xc3.jpg">
 
-<img src="./assets/xc4.jpg" style="max-width:600px;">
+<img class="preview" src="./assets/xc4.jpg">
 
 ## 加班
 
@@ -93,6 +93,6 @@
 
 ## cp22
 
-<img src="./assets/cp22.jpg" style="max-width:300px;">
+<img class="preview" src="./assets/cp22.jpg" style="max-width:300px;">
 
 这是大家一起去看 `cp22` 时候，我拍的妹纸，可爱 >\_<#@!

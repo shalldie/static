@@ -1,12 +1,18 @@
 # 咱の日志
 
+## 2020/01/25 02:23
+
+这段时间重构了一下 `server` 端，换成了 `nestjs`，使用 `lerna` 管理 `server` 和 `client`。
+
+ssl 使用了 `acmesh-official/acme.sh` 去定时更新。
+
 ## 2019/06/22 22:58
 
 上线了 `在线捐赠` 模块。
 
 ## 2019/04/25 13:22
 
-放弃了 `nuxt-ts`，改用 `ts-node` 来启用开发和production的server端。
+放弃了 `nuxt-ts`，改用 `ts-node` 来启用开发和 production 的 server 端。
 
 ## 2019/02/28 15:17
 

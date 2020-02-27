@@ -109,7 +109,7 @@ define("foo/title",
 
 ### 设计方案
 
-![示意图](./assets/requirejs.png)
+<img class="preview" src="./assets/requirejs.png">
 
 这个是我的设计思路，其中主要是分为两部分：`模块定义`、`模块获取`。
 

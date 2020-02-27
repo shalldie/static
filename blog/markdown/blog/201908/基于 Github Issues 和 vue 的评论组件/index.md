@@ -1,6 +1,6 @@
 # 基于 Github Issues 和 vue 的评论组件
 
-<a href="https://www.npmjs.com/package/vue-git-comment"><img class="ignore" src="https://img.shields.io/npm/v/vue-git-comment.svg"></a> <a href="https://travis-ci.org/shalldie/vue-git-comment"><img class="ignore" src="https://img.shields.io/travis/shalldie/vue-git-comment/master.svg"></a> <a href="https://cdn.jsdelivr.net/npm/vue-git-comment@0.0.11/dist/vue-git-comment.umd.min.js"><img class="ignore" src="https://img.badgesize.io/https://cdn.jsdelivr.net/npm/vue-git-comment@0.0.11/dist/vue-git-comment.umd.min.js?compression=gzip"></a>
+[![npm][npm_image]][npm_url] [![travis][travis_image]][travis_url] [![gzip][gzip_image]][gzip_url]
 
 [vue-git-comment](https://github.com/shalldie/vue-git-comment) ，这是一个基于 `github issues` 和 `vue` 的纯前端评论组件，不需要后端。
 
@@ -118,3 +118,10 @@ gitalk 我也特地去了解了一哈，也是非常优秀的一个项目。但�
     4.  想要更稳定、成熟的方案，建议去用 gitment 或 gitalk。
 
 ## Enjoy it! >\_<#@!
+
+[npm_image]: https://img.shields.io/npm/v/vue-git-comment.svg
+[npm_url]: https://www.npmjs.com/package/vue-git-comment
+[travis_image]: https://img.shields.io/travis/shalldie/vue-git-comment/master.svg
+[travis_url]: https://travis-ci.org/shalldie/vue-git-comment
+[gzip_image]: https://img.badgesize.io/https://cdn.jsdelivr.net/npm/vue-git-comment@0.0.11/dist/vue-git-comment.umd.min.js?compression=gzip
+[gzip_url]: https://cdn.jsdelivr.net/npm/vue-git-comment@0.0.11/dist/vue-git-comment.umd.min.js

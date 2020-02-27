@@ -1,12 +1,12 @@
 # vscode-background 背景插件
 
-<a href="https://marketplace.visualstudio.com/items?itemName=shalldie.background"><img class="ignore" src="https://vsmarketplacebadge.apphb.com/version/shalldie.background.svg"></a> <a href="https://marketplace.visualstudio.com/items?itemName=shalldie.background"><img class="ignore" src="https://vsmarketplacebadge.apphb.com/installs/shalldie.background.svg"></a> <a href="https://marketplace.visualstudio.com/items?itemName=shalldie.background"><img class="ignore" src="https://vsmarketplacebadge.apphb.com/rating/shalldie.background.svg"></a>
+[![Version](https://vsmarketplacebadge.apphb.com/version/shalldie.background.svg)](https://marketplace.visualstudio.com/items?itemName=shalldie.background) [![Installs](https://vsmarketplacebadge.apphb.com/installs/shalldie.background.svg)](https://marketplace.visualstudio.com/items?itemName=shalldie.background) [![Ratings](https://vsmarketplacebadge.apphb.com/rating/shalldie.background.svg)](https://vsmarketplacebadge.apphb.com/rating/shalldie.background.svg)
 
 这是 vscode 编辑器的一个 background 背景插件，用于修改 vscode 编辑器的背景。
 
 封面是网友送的，可爱死了 >\_<#@!
 
-![](https://cdn.jsdelivr.net/gh/shalldie/static/blog/images/cover/khvz5xA8W6HePmI.jpeg)
+<img class="preview" src="https://cdn.jsdelivr.net/gh/shalldie/static/blog/images/cover/khvz5xA8W6HePmI.jpeg">
 
 ## Add a lovely background-image to your vscode.
 
@@ -16,7 +16,7 @@ Vscode Market: [https://marketplace.visualstudio.com/items?itemName=shalldie.bac
 
 ## It looks like:
 
-![](./assets/vscode.gif)
+<img class="preview" src="./assets/vscode.gif">
 
 ## Warns 警告：
 
@@ -26,11 +26,11 @@ Vscode Market: [https://marketplace.visualstudio.com/items?itemName=shalldie.bac
 > **This extension works by editting the vscode's css file.**
 > So, a information appears while the first time to install or vscode update.U can click the [never show again] to avoid it.
 
-![](./assets/broken.png)
+<img class="preview" src="./assets/broken.png">
 
 This is the reason:
 
-![](./assets/reason.png)
+<img class="preview" src="./assets/reason.png">
 
 ## Config 配置项
 
