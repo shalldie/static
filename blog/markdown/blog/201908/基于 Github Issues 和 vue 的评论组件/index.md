@@ -1,4 +1,4 @@
-# 基于 Github Issues 和 vue 的评论组件
+# 基于 Github Issues 和 Vue 的评论组件
 
 [![npm][npm_image]][npm_url] [![travis][travis_image]][travis_url] [![gzip][gzip_image]][gzip_url]
 
