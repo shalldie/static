@@ -1,12 +1,22 @@
 # 接下来要做的事情
 
+> 整理 label 模块
+
+> <del>添加浅色 header 主题，并调整为靠右</del>
+
+> <del>添加新首页，新 footer</del>
+
+> <del>汉化留言板</del>
+
+> <del>更新 ssl</del>
+
 > <del>`markdown` 的图片自动推送 cdn</del>
 
 > <del>fix `vue-git-comment` 在 safari 上面的显示 bug</del>
 
 > <del>上 **https**</del>
 
-> 文章模块做好
+> <del>文章模块做好</del>
 
 > <del>外部库放到 cdn</del>
 
