@@ -74,15 +74,15 @@ export default {
 
 评论系统基于 `github api` ， 需要 [去申请](https://github.com/settings/applications/new) 一个 `OAuth application`。
 
-| Name          |     Type      | Required |     Default      | Description                                   |
-| :------------ | :-----------: | :------: | :--------------: | :-------------------------------------------- |
-| client_id     |   `string`    |  `true`  |                  | 申请的 client_id                              |
-| client_secret |   `string`    |  `true`  |                  | 申请的 client_secret                          |
-| owner         |   `string`    |  `true`  |                  | issue 所在仓库的所有者                        |
-| repo          |   `string`    |  `true`  |                  | 仓库名称                                      |
-| uuid          |   `string`    |  `true`  |                  | 用于区分文章的唯一标识，每个评论间不能重复    |
-| title         |   `string`    | `false`  | `document.title` | issue 使用的标题，选填。 默认使用当前页面标题 |
-| language      | `en \| zh-CN` | `false`  |       `en`       | 国际化语言，选填。 默认使用 `en`              |
+| Name          |     Type     | Required |     Default      | Description                                   |
+| :------------ | :----------: | :------: | :--------------: | :-------------------------------------------- |
+| client_id     |   `string`   |  `true`  |                  | 申请的 client_id                              |
+| client_secret |   `string`   |  `true`  |                  | 申请的 client_secret                          |
+| owner         |   `string`   |  `true`  |                  | issue 所在仓库的所有者                        |
+| repo          |   `string`   |  `true`  |                  | 仓库名称                                      |
+| uuid          |   `string`   |  `true`  |                  | 用于区分文章的唯一标识，每个评论间不能重复    |
+| title         |   `string`   | `false`  | `document.title` | issue 使用的标题，选填。 默认使用当前页面标题 |
+| language      | `en | zh-CN` | `false`  |       `en`       | 国际化语言，选填。 默认使用 `en`              |
 
 ## Similar Project
 
