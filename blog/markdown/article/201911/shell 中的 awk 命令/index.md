@@ -12,7 +12,56 @@ AWK 程序是由 `pattern { action }` **对** 组成的，其中 `pattern` 表�
 
 `pattern` 和 `action` 都是可选的，无 `pattern` 表示无匹配条件，而无 `action` 默认打印原始内容。
 
+### 关于 pattern
+
+`pattern` 一般可以用表达式，或者正则。
+
+```shell
+# 输出长度大于10的行
+& awk 'length($0) > 10'
+
+# 使用正则表达式，输出以 h 开头的行
+& awk '/^h/ ~ $0'
+# 可以简写成
+& awk '/^h/'
+```
+
 常见的 `pattern` 除了 AWK 表达式之外，还有 `BEGIN` 或 `END`。这两种条件对应的 `action` 分别是读取所有的记录之前和之后。同时，如 `pattern1, pattern2` 的条件表示符合条件 `pattern1` 和 `pattern2` 的记录及其之间的部分。
+
+```shell
+& awk 'BEGIN { print "hello" }'
+```
+
+例如在程序开始的时候进行某个操作，这个时候无需使用管道，或者查询某个文件， `BEGIN` 中的动作就会执行，而 `END` 一般是作为统计结果的时候去输出。
+
+### 关于 action
+
+`action` 是具体要执行的逻辑，只有条件符合 `pattern` 的时候才会去执行。
+
+它一般用于输出，也可以只执行某一段逻辑。同样的，`if else`，`for` 循环之类也包含在它的逻辑之中。下面是使用 awk 打印 99 乘法表
+
+```shell
+$ awk 'BEGIN {
+    for(x=1; x<10; x++) {
+        for(y=1; y<10; y++) {
+            if (y <= x) {
+                printf "%s * %s = %s \t", y, x, x * y
+            }
+        }
+        printf "\n"
+    }
+}'
+
+1 * 1 = 1
+1 * 2 = 2 	2 * 2 = 4
+1 * 3 = 3 	2 * 3 = 6 	3 * 3 = 9
+1 * 4 = 4 	2 * 4 = 8 	3 * 4 = 12 	4 * 4 = 16
+1 * 5 = 5 	2 * 5 = 10 	3 * 5 = 15 	4 * 5 = 20 	5 * 5 = 25
+1 * 6 = 6 	2 * 6 = 12 	3 * 6 = 18 	4 * 6 = 24 	5 * 6 = 30 	6 * 6 = 36
+1 * 7 = 7 	2 * 7 = 14 	3 * 7 = 21 	4 * 7 = 28 	5 * 7 = 35 	6 * 7 = 42 	7 * 7 = 49
+1 * 8 = 8 	2 * 8 = 16 	3 * 8 = 24 	4 * 8 = 32 	5 * 8 = 40 	6 * 8 = 48 	7 * 8 = 56 	8 * 8 = 64
+1 * 9 = 9 	2 * 9 = 18 	3 * 9 = 27 	4 * 9 = 36 	5 * 9 = 45 	6 * 9 = 54 	7 * 9 = 63 	8 * 9 = 72 	9 * 9 = 81
+```
 
 ## AWK 内置方法
 
@@ -110,6 +159,18 @@ drwxr-xr-x    5 xxx  staff     160 Mar 11 18:15 scripts
 & git push origin HEAD:refs/for/`git branch | awk '$1 == "*" { print $2 }'`
 ```
 
+### 正则提取内容
+
+```shell
+& cat temp.log
+
+[2019/11/12 13:39] ...balabala {"method":"/fetch/detail",..."message":"权限不足"}
+
+& awk '{ match($0, /"method":"([^"]+).*"message":"([^"]+)/, a); printf "接口：%s, 错误：%s \n", a[1], a[2] }' temp.log
+
+接口：/fetch/detail, 错误：权限不足
+```
+
 ## 相关资料
 
-[维基百科](https://zh.wikipedia.org/wiki/AWK)
+[AWK - 维基百科](https://zh.wikipedia.org/wiki/AWK)
