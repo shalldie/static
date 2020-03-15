@@ -18,18 +18,18 @@ AWK 程序是由 `pattern { action }` **对** 组成的，其中 `pattern` 表�
 
 ```shell
 # 输出长度大于10的行
-& awk 'length($0) > 10'
+$ awk 'length($0) > 10'
 
 # 使用正则表达式，输出以 h 开头的行
-& awk '/^h/ ~ $0'
+$ awk '/^h/ ~ $0'
 # 可以简写成
-& awk '/^h/'
+$ awk '/^h/'
 ```
 
 常见的 `pattern` 除了 AWK 表达式之外，还有 `BEGIN` 或 `END`。这两种条件对应的 `action` 分别是读取所有的记录之前和之后。同时，如 `pattern1, pattern2` 的条件表示符合条件 `pattern1` 和 `pattern2` 的记录及其之间的部分。
 
 ```shell
-& awk 'BEGIN { print "hello" }'
+$ awk 'BEGIN { print "hello" }'
 ```
 
 例如在程序开始的时候进行某个操作，这个时候无需使用管道，或者查询某个文件， `BEGIN` 中的动作就会执行，而 `END` 一般是作为统计结果的时候去输出。
@@ -93,7 +93,7 @@ AWK 内置了一些方法，以下是比较常用的。
 
 ```shell
 # 需要从这个文本中提取网址、文本
-& content='<a href="http://www.baidu.com">百度</a>'
+$ content='<a href="http://www.baidu.com">百度</a>'
 
 # 使用 match ，从中获取子组并格式化输出
 $ echo $content | awk '{ match($0, /.*href="(.*)".*>(.*)</, a); printf "网址：%s, 文本：%s \n", a[1], a[2] }'
@@ -124,7 +124,7 @@ AWK 的内置变量包括域变量，例如$1, $2, $3，以及$0。这些变量�
 
 ```shell
 # 查看当前目录
-& ls -l
+$ ls -l
 
 total 584
 -rw-r--r--@   1 xxx  staff      50 Feb 28  2019 README.md
@@ -137,7 +137,7 @@ drwxr-xr-x    5 xxx  staff     160 Jan 15 21:08 packages
 drwxr-xr-x    5 xxx  staff     160 Mar 11 18:15 scripts
 
 # 把第5列的加起来，统计出当前目录总大小
-& ls -l | awk 'BEGIN { total = 0 } { total += $5 } END { print total }'
+$ ls -l | awk 'BEGIN { total = 0 } { total += $5 } END { print total }'
 
 303975
 ```
@@ -146,21 +146,21 @@ drwxr-xr-x    5 xxx  staff     160 Mar 11 18:15 scripts
 
 ```shell
 # 获取当前分支名
-& git branch | awk '$1 == "*" { print $2 }'
+$ git branch | awk '$1 == "*" { print $2 }'
 
 # 推送到远程分支
 # 因为有时候分支名特别长，这时候，弄个 function 太方便了
-& git push origin HEAD:refs/for/`git branch | awk '$1 == "*" { print $2 }'`
+$ git push origin HEAD:refs/for/`git branch | awk '$1 == "*" { print $2 }'`
 ```
 
 ### 正则提取内容
 
 ```shell
-& cat temp.log
+$ cat temp.log
 
 [2019/11/12 13:39] ...balabala {"method":"/fetch/detail",..."message":"权限不足"}
 
-& awk '{ match($0, /"method":"([^"]+).*"message":"([^"]+)/, a); printf "接口：%s, 错误：%s \n", a[1], a[2] }' temp.log
+$ awk '{ match($0, /"method":"([^"]+).*"message":"([^"]+)/, a); printf "接口：%s, 错误：%s \n", a[1], a[2] }' temp.log
 
 接口：/fetch/detail, 错误：权限不足
 ```
