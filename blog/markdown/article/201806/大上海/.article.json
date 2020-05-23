@@ -1,7 +1,7 @@
 {
     "name": "great-shanghai",
     "title": "大上海",
-    "cover": "https://cdn.jsdelivr.net/gh/shalldie/static/blog/images/cover/5b16a9390c143.jpg",
+    "cover": "images/cover/5b16a9390c143.jpg",
     "publishTime": 1528043350409,
     "labels": [
         "上海"

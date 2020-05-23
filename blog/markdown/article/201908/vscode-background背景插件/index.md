@@ -6,7 +6,7 @@
 
 封面是网友送的，可爱死了 >\_<#@!
 
-<img class="preview" src="https://cdn.jsdelivr.net/gh/shalldie/static/blog/images/cover/khvz5xA8W6HePmI.jpeg">
+<img class="preview" src="../../../../images/cover/khvz5xA8W6HePmI.jpeg">
 
 ## Add a lovely background-image to your vscode.
 

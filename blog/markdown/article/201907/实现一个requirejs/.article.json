@@ -1,7 +1,7 @@
 {
     "name": "write-a-requirejs",
     "title": "实现一个 requirejs",
-    "cover": "https://cdn.jsdelivr.net/gh/shalldie/static/blog/images/cover/5d2c7594cdbc664965.png",
+    "cover": "images/cover/5d2c7594cdbc664965.png",
     "publishTime": 1564043074222,
     "labels": [
         "javascript",

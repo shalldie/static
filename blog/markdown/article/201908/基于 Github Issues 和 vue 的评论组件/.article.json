@@ -1,7 +1,7 @@
 {
     "name": "comment-system-with-githubissues-vue",
     "title": "基于 Github Issues 和 Vue 的评论组件",
-    "cover": "https://cdn.jsdelivr.net/gh/shalldie/static/blog/images/cover/Fjdy35WhvBTrR9233.png",
+    "cover": "images/cover/Fjdy35WhvBTrR9233.png",
     "publishTime": 1564723561699,
     "labels": [
         "javascript",
