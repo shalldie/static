@@ -1,7 +1,7 @@
 {
     "name": "awk-in-shell",
     "title": "shell 中的 awk 命令",
-    "cover": "images/cover/jk6fdsa56fdag556k.png",
+    "cover": "assets/cover.png",
     "publishTime": 1573222210000,
     "labels": [
         "shell",

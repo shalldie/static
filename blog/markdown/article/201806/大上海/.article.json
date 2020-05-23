@@ -1,7 +1,7 @@
 {
     "name": "great-shanghai",
     "title": "大上海",
-    "cover": "images/cover/5b16a9390c143.jpg",
+    "cover": "assets/cover.jpg",
     "publishTime": 1528043350409,
     "labels": [
         "上海"
