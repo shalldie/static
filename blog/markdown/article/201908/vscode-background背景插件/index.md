@@ -42,6 +42,7 @@ This is the reason:
 | `background.style`        |    `Object`     | 自定义样式 <br> Custom style                                                                |
 | `background.styles`       | `Array<Object>` | 每个图片的独立样式 <br> Style of each image.                                                |
 | `background.useFront`     |    `Boolean`    | 前景图/背景图。 在代码上面还是下面 <br> `true`:On the top of code. `false`: Behind the code |
+| `background.loop`         |    `Boolean`    | 循环模式，会重复显示图片 <br> `loop` mode, may repeat your images                           |
 
 ## Notice 提示
 
