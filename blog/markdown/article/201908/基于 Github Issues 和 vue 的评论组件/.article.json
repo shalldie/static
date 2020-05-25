@@ -1,5 +1,5 @@
 {
-    "name": "comment-system-with-githubissues-vue",
+    "name": "vue-git-comment",
     "title": "基于 Github Issues 和 Vue 的评论组件",
     "cover": "assets/cover.png",
     "publishTime": 1564723561699,
