@@ -2,6 +2,10 @@
 
 `Virtual DOM` 本质上来说是 javascript 对象，用来描述 `DOM` 结构以及其附加的`属性、状态、事件`等。
 
+我在学习了 [snabbdom](https://github.com/snabbdom/snabbdom) 源码后，借鉴其思路写了个简化版 [mini-vdom](https://github.com/shalldie/mini-mvvm/tree/master/packages/mini-vdom)，并使用 `mini-vdom` 构建了一个 `MVVM` 库 [mini-mvvm](https://github.com/shalldie/mini-mvvm)。
+
+写下这篇文章，一方面验证自己的理解，另一方面分享所学。
+
 ## 为什么要用 Virtual DOM
 
 目前常见的 React，Vue 等前端框架，在设计上都使用了 `Virtual DOM`（下文中都简称`vdom`），旨在便于管理 dom，提高性能，以及添加跨平台能力。
@@ -17,10 +21,9 @@
 "越封装越慢"，`vdom` 底层还是调用了普通的操作 dom 的相关 api，这里说的提高性能，说的是可能避免以下情况：
 
 1. 多次操作 dom 后的结果可能跟最初相比没有差异，而如果使用 `vdom` 不会触发更新 dom。
-2. 最终的 dom 跟原始 dom 有差异，而 `vdom` 会用最少的次数，尽可能的复用 dom 去达成目的以节约消耗，毕竟 dom 的操作非常昂贵。
+2. 最终的 dom 跟原始 dom 有差异，而 `vdom` 会用最少的次数，尽可能的复用 dom 去达成更新目的以节约消耗，毕竟 dom 的操作非常昂贵。
 3. ...想到再加
 
 ### 跨平台能力
 
 上来就说过，`vdom` 是对 dom 的一种描述，本质是 javascript 对象，或者编译为其它语言的对象，那么换一种宿主环境，就可以让 `vdom` 在新的平台继续使用，比如去进行 `SSR(Server Side Render)` ，或者很出名的 `React Native`。
-
