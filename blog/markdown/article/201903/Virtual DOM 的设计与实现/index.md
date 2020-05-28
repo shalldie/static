@@ -1,8 +1,8 @@
 # Virtual DOM 的设计与实现
 
-`Virtual DOM` 本质上来说是 javascript 对象，用来描述 `DOM` 结构以及其附加的`属性、状态、事件`等。
+目前流行的一些前端框架，比如 `React` 和 `Vue`，都是用了 `Virtual DOM` 作为数据和真实DOM之间的一层缓冲，并不是直接更新 `dom`。`Virtual DOM` 本质上来说是 javascript 对象，用来描述 `DOM` 结构以及其附加的`属性、状态、事件`等。
 
-我在学习了 [snabbdom][snabbdom] 源码后，借鉴其思路写了个简化版 [mini-vdom][mini-vdom]，并使用 `mini-vdom` 构建了一个 `MVVM` 库 [mini-mvvm][mini-mvvm]。
+我在学习了 [snabbdom][snabbdom] 源码后，借鉴其思路写了个简化版 [mini-vdom][mini-vdom]，并使用 `mini-vdom` 构建了一个 `MVVM` 库 [mini-mvvm][mini-mvvm]。之所以选择 `snabbdom` ，是因为在比较了一些市面上的 `vdom` 库，发现 `snabbdom` 实现尤为巧妙，插件机制可以很方面的组合自己所需。另外就是 `Vue` 也是魔改了 `snabbdom` 作为自己 `vdom` 的底层部分，因此有极大的说服力。
 
 写下这篇文章，一方面验证自己的理解，另一方面分享所学。
 
