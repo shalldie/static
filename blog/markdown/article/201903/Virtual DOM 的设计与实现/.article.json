@@ -5,6 +5,7 @@
     "publishTime": 1551798393000,
     "labels": [
         "virtual dom",
+        "snabbdom",
         "javascript"
     ],
     "edit": true
