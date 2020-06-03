@@ -340,7 +340,11 @@ addVnodes(parentElm, null, children);
 
 `Vue` 中对 `key` 有这么一段描述：
 
-    key 的特殊 attribute 主要用在 Vue 的虚拟 DOM 算法，在新旧 nodes 对比时辨识 VNodes。如果不使用 key，Vue 会使用一种最大限度减少动态元素并且尽可能的尝试就地修改/复用相同类型元素的算法。而使用 key 时，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
+---
+
+key 的特殊 attribute 主要用在 Vue 的虚拟 DOM 算法，在新旧 nodes 对比时辨识 VNodes。如果不使用 key，Vue 会使用一种最大限度减少动态元素并且尽可能的尝试就地修改/复用相同类型元素的算法。而使用 key 时，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
+
+---
 
 下面这个算法，可以了解到 key 对 diff 算法的影响。
 
@@ -370,7 +374,7 @@ for (let i = 0; i < children.length; i++) {
         oldMirror[oldVnodeIndex] = undefined;
         // 调整顺序（如果旧的索引对不上新索引）
         if (oldVnodeIndex !== i) {
-            parentElm.insertBefore(oldVnode.elm, parentElm.children[i + 1]);
+            parentElm.insertBefore(oldVnode.elm, parentElm.childNodes[i + 1]);
         }
         // 比较数据,进行更新
         // eslint-disable-next-line
@@ -378,7 +382,7 @@ for (let i = 0; i < children.length; i++) {
     }
     // 不能复用就创建新的
     else {
-        addVnodes(parentElm, parentElm.children[i + 1], [vnode]);
+        addVnodes(parentElm, parentElm.childNodes[i + 1], [vnode]);
     }
 }
 
@@ -389,16 +393,230 @@ rmVnodes.length && removeVnodes(parentElm, rmVnodes);
 ```
 
 这个算法非常简单，直观，有效。在对列表进行 `修改`，`添加` 操作的时候，表现的非常高效，可读性也不错，易理解。
+
 但是缺点也很明显：如果对列表非尾部的地方，进行 `插入`，`删除` 操作，这时候最佳方式应该就是直接进行 `插入` 或 `删除`，而这个算法会从上到下依次进行没必要的复用。虽然添加 `key` 可以一定程度上解决半个问题，避免在 `插入` 时候的复用，但是不能指望用户里面没有白痴或者懒鬼，所以还是有改善的空间。
 
-#### 更完善的 diff 算法
+## 更完善的 diff 算法
 
-... 有时间加上
+这个算法的思路来自 [snabbdom][snabbdom]，在实现上有差异，我把它简化了（可能损失了一些微小的性能？）。
 
-## 文中相关的 Demo 地址
+据我了解也是业内相对更通用的 diff 实现，各 `vdom` 库已经趋于一致。虽然有更优的算法可以在一些更复杂的情况减少 dom 操作，但是复杂度就上去了。大概大部分人觉得，下面的这种实现，可以让 `可读性`，`效率` 达到可接受的平衡态吧。
 
-[mini-vdom][mini-vdom]
-[mini-mvvm][mini-mvvm]
+### 概述
+
+上面那个简单的 diff 算法，是从左到右（从上到下）依次做对比，可以满足 `尾部插入`，`尾部删除` 操作，但是对于 `非尾部插入`，`非尾部删除` 就力不从心，所以新的算法需要弥补这点。
+
+    除了从左到右，再加一种从右到左。 从两端向中间依次进行对比。
+
+```shell
+    oldStartIndex                                 oldEndIndex
+          +                                           +
+          |                                           |
+          v                                           v
+      +---+---+  +-------+  +-------+  +-------+  +---+---+
+      |       |  |       |  |       |  |       |  |       |
+old:  |       |  |       |  |       |  |       |  |       |
+      |       |  |       |  |       |  |       |  |       |
+      +-------+  +-------+  +-------+  +-------+  +-------+
+
+      +-------+  +-------+  +-------+  +-------+  +-------+
+      |       |  |       |  |       |  |       |  |       |
+new:  |       |  |       |  |       |  |       |  |       |
+      |       |  |       |  |       |  |       |  |       |
+      +---+---+  +-------+  +-------+  +-------+  +---+---+
+          ^                                           ^
+          |                                           |
+          +                                           +
+    newStartIndex                                 newEndIndex
+```
+
+原理听起来就是这么简单。但是实现上挺麻烦，这些步骤需要耐心看下去。
+
+假设有 4 个索引，分别是：
+
+-   `oldStartIndex`，指向 oldChildren 左边遍历到的节点
+-   `oldEndIndex`，指向 oldChildren 右边遍历到的节点
+-   `newStartIndex`，指向 newChildren 左边遍历到的节点
+-   `newEndIndex`，指向 newChildren 左边遍历到的节点
+
+```ts
+while (oldStartIndex <= oldEndIndex && newStartIndex <= newEndIndex) {
+    switch (true) {
+    }
+}
+```
+
+不断重复以下对比过程，直到两个数组中任一组的头指针超过尾指针，循环结束。
+
+### 校验当前指向的节点是否可用
+
+```ts
+    // 1. 先校验2个 old start/end vnode 是否为空，当为`undefined`的时候，表示被其它地方复用了
+    // 对 new start/end vnode 也做处理，是因为可能移动后根本没子节点
+    case !oldStartVNode:
+        oldStartVNode = oldChildren[++oldStartIndex];
+        break;
+    case !oldEndVNode:
+        oldEndVNode = oldChildren[--oldEndIndex];
+        break;
+    case !newStartVNode:
+        newStartVNode = children[++newStartIndex];
+        break;
+    case !newEndVNode:
+        newEndVNode = oldChildren[--newEndIndex];
+        break;
+```
+
+对于 `oldChildren` 来说，如果某个节点被复用，可以把它赋值 `undefined` 作为标记，因此当指向的节点为空时，需要移动指针到下一个。即 `oldStartIndex` 向右，或 `oldEndIndex` 向左。
+
+`newChildren` 也需要添加判断，因为可能新的 children 长度为 0。
+
+### 首首对比、尾尾对比
+
+```ts
+    // 2. 首首、尾尾 对比， 适用于 普通的 插入、删除 节点
+    // 首首比较
+    case VNode.isSameVNode(oldStartVNode, newStartVNode):
+        patchVNode(oldStartVNode, newStartVNode);
+        oldStartVNode = oldChildren[++oldStartIndex];
+        newStartVNode = children[++newStartIndex];
+        break;
+
+    // 尾尾比较
+    case VNode.isSameVNode(oldEndVNode, newEndVNode):
+        patchVNode(oldEndVNode, newEndVNode);
+        oldEndVNode = oldChildren[--oldEndIndex];
+        newEndVNode = children[--newEndIndex];
+        break;
+```
+
+`首首对比` 好说，跟上面那个简单 diff 一样从左往右判断。但是如果用户的行为是向列表首部添加一项，那么继续从左往右就会浪费很多计算量。
+
+在 `首首对比` 失败后，再进行 `尾尾对比`，从右向左判断，这样就适用于普通任意位置的 插入、删除 节点。
+
+### 首尾交叉对比
+
+```ts
+    // 3. 旧尾=》新头，旧头=》新尾， 适用于移动了某个节点的情况
+    // 旧尾=》新头，把节点左移
+    //    [1, 2, 3]
+    // [3, 1, 2]
+    case VNode.isSameVNode(oldEndVNode, newStartVNode):
+        parentElm.insertBefore(oldEndVNode.elm, parentElm.childNodes[newStartIndex]);
+        patchVNode(oldEndVNode, newStartVNode);
+        oldEndVNode = oldChildren[--oldEndIndex];
+        newStartVNode = children[++newStartIndex];
+        break;
+
+    // 旧头=》新尾，把节点右移
+    // [1, 2, 3]
+    //    [2, 3, 1]
+    case VNode.isSameVNode(oldStartVNode, newEndVNode):
+        parentElm.insertBefore(oldEndVNode.elm, oldEndVNode.elm.nextSibling);
+        patchVNode(oldStartVNode, newEndVNode);
+        oldStartVNode = oldChildren[++oldStartIndex];
+        newEndVNode = children[--newEndIndex];
+        break;
+```
+
+`首尾交叉对比` 是交叉对比的一部分，其实跳过这里到下一步也没问题。但是如果添加了这种判断，就为 `移动了某个节点` 的情况避免了计算消耗，会更快。
+
+1. `旧尾` 跟 `新头` 对比，适用于节点左移的情况
+
+```shell
+# example，3 移动到了左边
+old:     [1, 2, 3]
+new:  [3, 1, 2]
+```
+
+2. `旧头` 跟 `新尾` 对比，适用于节点右移的情况
+
+```shell
+# example，1 移动到了右边
+old:  [1, 2, 3]
+new:     [2, 3, 1]
+```
+
+### 交叉对比剩余部分
+
+```ts
+    // 4. 交叉对比剩余部分
+    default:
+        // 可以被复用的vnode的索引
+        const oldVnodeIndex = oldChildren.findIndex((node, index) => {
+            return (
+                // 索引在 oldStartIndex ~ oldEndIndex
+                // 之前没有被复用过
+                //  并且可以被复用
+                index >= oldStartIndex &&
+                index <= oldEndIndex &&
+                node &&
+                VNode.isSameVNode(node, newStartVNode)
+            );
+        });
+        // 如果有vnode可以复用
+        if (~oldVnodeIndex) {
+            const oldVnode = oldChildren[oldVnodeIndex];
+
+            // 把之前的置空，表示已经用过。之后仍然存留的要被删除
+            oldChildren[oldVnodeIndex] = undefined;
+            // 调整顺序（如果旧的索引对不上新索引）
+            if (oldVnodeIndex !== newStartIndex) {
+                parentElm.insertBefore(oldVnode.elm, parentElm.childNodes[newStartIndex]);
+            }
+            // 比较数据,进行更新
+            patchVNode(oldVnode, newStartVNode);
+        }
+        // 不能复用就创建新的
+        // old: [1,    2, 3,    4]
+        // new: [1, 5, 2, 3, 6, 4]
+        else {
+            addVnodes(parentElm, parentElm.childNodes[newStartIndex], [newStartVNode]);
+        }
+
+        // 新头 向右移动一位
+        newStartVNode = children[++newStartIndex];
+        break;
+```
+
+-   `oldChildren` 中俩指针中间的部分，属于没被复用的部分。
+-   `newChildren` 中俩指针中间的部分，目前没能够找到可复用节点。
+
+对于 `newChildren` 的剩余部分，依次从 `oldChildren` 的剩余部分中去找可复用的节点，如果没找到，就生成一个新的去填充，`oldChildren` 里面如果某一项被复用，就给这个索引位置赋值 `undefined` 作为标记，下次循环直接跳过。
+
+### 善后工作
+
+```ts
+// 如果循环完毕，还有 oldStartIndex ～ oldEndIndex || newStartIndex ～ newEndIndex 之间还有空余，
+// 表示有旧节点未被删除干净，或者新节点没有完全添加完毕
+
+// 旧的 vnodes 遍历完，新的没有
+// 表示有新的没有添加完毕
+if (oldStartIndex > oldEndIndex && newStartIndex <= newEndIndex) {
+    addVnodes(parentElm, children[newEndIndex + 1]?.elm, children.slice(newStartIndex, newEndIndex + 1));
+}
+// 新的 vnodes 遍历完，旧的没有
+// 表示有旧的没有删除干净
+else if (oldStartIndex <= oldEndIndex && newStartIndex > newEndIndex) {
+    removeVnodes(
+        parentElm,
+        oldChildren.slice(oldStartIndex, oldEndIndex + 1).filter(n => !!n)
+    );
+}
+```
+
+这时候有 2 种情况需要处理一下：
+
+-   `oldChildren` 遍历完， `newChildren` 没有。 表示旧节点都被复用了，还有部分新节点要重新生成。
+-   `newChildren` 遍历完， `oldChildren` 没有。 表示新节点都已经生成完毕，旧节点中有一部分没用上，都需要删除。
+
+## 相关链接
+
+[snabbdom][snabbdom]
+[A mini virtual dom lib. 一个轻量级的虚拟 dom 库][mini-vdom]
+[基于 virtual dom - mini-vdom 的轻量级 mvvm 库][mini-mvvm]
+[emmet][emmet]
+[javascript 中的正则表达式][regex-in-javascript]
 
 [snabbdom]: https://github.com/snabbdom/snabbdom
 [mini-vdom]: https://github.com/shalldie/mini-mvvm/tree/master/packages/mini-vdom

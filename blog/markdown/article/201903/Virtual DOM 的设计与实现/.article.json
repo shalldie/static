@@ -7,6 +7,5 @@
         "virtual dom",
         "snabbdom",
         "javascript"
-    ],
-    "edit": true
+    ]
 }
