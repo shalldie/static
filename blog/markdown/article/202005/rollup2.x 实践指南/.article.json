@@ -1,0 +1,11 @@
+{
+    "name": "rollup2",
+    "title": "rollup2.x 实践指南",
+    "cover": "assets/cover.jpg",
+    "publishTime": 1585406193000,
+    "labels": [
+        "rollup",
+        "javascript",
+        "typescript"
+    ]
+}
