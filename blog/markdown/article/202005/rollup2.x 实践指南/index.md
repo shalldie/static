@@ -2,8 +2,6 @@
 
 ![](assets/cover.jpg)
 
-<!-- <img class="preview" src="assets/cover.jpg"> -->
-
     最近给一些老项目用的 `rollup` 升了个级，发现 `2.x` 的好多依赖包都换名字了... 颇费了些功夫，必须做个记录。
     吐槽：
     中文版文档太老了，还是1.x的，很久很久没人更新。
@@ -30,6 +28,39 @@
 这个是 `webpack` 目前做不到的！ `webpack` 可以打包别人的 `es6 模块`，但是自己的打包产出是没有 `es6` 这一项的。
 
 `Rollup` 一般可以编译为 `UMD` 或 `CommonJS` 格式，然后在 `package.json` 文件的 `main` 属性中指向当前编译的版本。如果你的 `package.json` 也具有 `module` 字段，像 `Rollup` 和 `webpack 2+` 这样的 ES6 感知工具(ES6-aware tools)将会直接导入 `ES6` 模块版本。
+
+## 创建一个 bundle
+
+不考虑 command line 了，一般的场景还是需要单独的配置文件。
+
+```shell
+$ vim package.json
+```
+
+```json
+{
+    "scripts": {
+        "build": "rollup -c"
+    }
+}
+```
+
+```shell
+$ vim rollup.config.js
+```
+
+```ts
+export default {
+    input: 'src/main.js',
+    output: {
+        file: 'bundle.js',
+        format: 'cjs'
+    },
+    plugins: [
+        // ...
+    ]
+};
+```
 
 ## 常用插件汇总
 
