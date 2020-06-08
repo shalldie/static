@@ -1,5 +1,7 @@
 # 接下来要做的事情
 
+> 优化一下 `highlight.js`，按需引入
+
 > <del>整理 label 模块</del>
 
 > <del>添加浅色 header 主题，并调整为靠右</del>
