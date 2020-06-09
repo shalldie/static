@@ -1,6 +1,8 @@
 # 接下来要做的事情
 
-> 优化一下 `highlight.js`，按需引入
+> 抽空做个 `vue-scroll-affix`
+
+> <del>优化一下 `highlight.js`，按需引入<del> 放弃了，`10.x` 改动对现在有点影响，以后再看
 
 > <del>整理 label 模块</del>
 
