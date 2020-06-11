@@ -31,21 +31,25 @@
 
 ## 创建一个 bundle
 
+### 安装
+
+```bash
+$ npm install rollup --save-dev
+```
+
+### 入口
+
+需要一个打包入口
+
+```bash
+$ vim src/main.js
+```
+
+### 配置
+
 不考虑 command line 了，一般的场景还是需要单独的配置文件。
 
-```shell
-$ vim package.json
-```
-
-```json
-{
-    "scripts": {
-        "build": "rollup -c"
-    }
-}
-```
-
-```shell
+```bash
 $ vim rollup.config.js
 ```
 
@@ -60,6 +64,22 @@ export default {
         // ...
     ]
 };
+```
+
+```shell
+$ vim package.json
+```
+
+```json
+{
+    "scripts": {
+        "build": "rollup -c"
+    }
+}
+```
+
+```shell
+$ npm run build
 ```
 
 ## 常用插件汇总
