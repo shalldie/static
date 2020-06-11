@@ -1,6 +1,6 @@
 # rollup2.x 实践指南
 
-![](assets/cover.jpg)
+<img src="assets/cover.jpg">
 
     最近给一些老项目用的 `rollup` 升了个级，发现 `2.x` 的好多依赖包都换名字了... 颇费了些功夫，必须做个记录。
     吐槽：
