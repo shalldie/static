@@ -1,6 +1,6 @@
 # 接下来要做的事情
 
-> 抽空做个 `vue-scroll-affix`
+> <del>抽空做个 `vue-scroll-affix`</del> 添加了 [scroll-active](https://github.com/shalldie/scroll-active) 和 [scroll-affix](https://github.com/shalldie/scroll-affix)
 
 > <del>优化一下 `highlight.js`，按需引入<del>
 
