@@ -155,6 +155,12 @@ pluins: [
 
 最终的方案是 [rollup-plugin-typescript2](https://www.npmjs.com/package/rollup-plugin-typescript2) ，这个是社区提供的一种解决方案，集成了 `tslib`，没有抛弃类型检查，不需要额外安装包（除了 typescript 本身），速度也很快！ 这个包从各个方面碾压了官方提供的 `@rollup/plugin-typescript`（前身是 `rollup-plugin-typescript`，以前就坑过我），不需要犹豫就这个了 😂
 
+### 支持 Vue
+
+需要添加 `rollup-plugin-vue@5.x` ，额外添加依赖 `vue-template-compiler`。
+
+注意，`rollup-plugin-vue` 在 `6.x - beta` 的依赖更换成了 `@vue/compiler-sfc`，但是目前还有些问题，等待正式版出来再看吧。
+
 ### 支持 postcss、sass、less、css
 
 使用 [rollup-plugin-postcss](https://www.npmjs.com/package/rollup-plugin-postcss)，支持 `postcss` ，可以额外添加相关 postcss 插件比如 autoprefixer 去实现 css 的 polyfill
