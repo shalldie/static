@@ -2,6 +2,8 @@
 
 为了这破博客陆陆续续写过一些库。
 
+分为两部分，`nestjs` 和 `nuxt`，使用 `lerna` 桥接两个项目使得目录和依赖都完全分离开。
+
 ## vue-git-comment
 
 [vue-git-comment](https://github.com/shalldie/vue-git-comment)
