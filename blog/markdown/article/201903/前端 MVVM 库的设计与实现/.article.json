@@ -1,0 +1,13 @@
+{
+    "name": "mini-mvvm",
+    "title": "前端 MVVM 库的设计与实现",
+    "cover": "assets/cover.png",
+    "publishTime": 1552230393000,
+    "labels": [
+        "mvvm",
+        "virtual dom",
+        "vue",
+        "javascript"
+    ],
+    "edit": true
+}
