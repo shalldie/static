@@ -11,11 +11,11 @@ nginx 经常用，不过一直感觉配置挺玄学，，，以往都贯彻 `“
 ```nginx
 http {
     gzip on;
-    ...
+    # ...
 
     server {
         listen 80;
-        ...
+        # ...
 
         location / {
             # config
