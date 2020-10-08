@@ -2,10 +2,10 @@
     "name": "args-in-shell",
     "title": "shell 中的参数传递",
     "cover": "assets/cover.jpg",
-    "publishTime": 1583220153000,
+    "publishTime": 1604369002000,
     "labels": [
-        "args",
-        "shell"
+        "shell",
+        "args"
     ],
     "edit": true
 }
