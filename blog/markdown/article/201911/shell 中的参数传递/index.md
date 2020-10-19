@@ -89,4 +89,15 @@ getopts optstring optname
 
 ## 环境变量
 
-把变量 `export` 一下，之后的 `子shell` 就都可以用了
+使用环境变量传参，也是一种常见的方式。
+
+```shell
+# 当前脚本、以及所有子shell，都可以访问 $ABC
+export ABC="DEF"
+sh balabala.sh
+
+# or
+
+# 在该子shell中，可以访问 $ABC
+ABC="DEF" sh balabala.sh
+```
