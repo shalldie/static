@@ -1,5 +1,5 @@
 {
-    "name": "CMD-ENTRYPOINT-in-Dockerfile",
+    "name": "cmd-entrypoint-in-dockerfile",
     "title": "Dockerfile 的 CMD 和 ENTRYPOINT",
     "cover": "assets/cover.png",
     "publishTime": 1591194780000,
