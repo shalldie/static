@@ -2,7 +2,9 @@
 
 <img src="assets/cover.png">
 
-因工作需要把一些项目迁移到了容器中，巩固和重新学习了镜像构建的一些知识。<br >
+<br ><br >
+
+因工作需要把一些项目迁移到了容器中，巩固和重新学习了镜像构建的一些知识。
 其中 `CMD` 和 `ENTRYPOINT` 作为容器启动入口，对于应用来说是必须要了解和掌握的内容。
 
 ## CMD
@@ -23,7 +25,7 @@
 
 让应用程序作为 `PID=1` 的进程，可以接收 `Unix` 信号，比如 `docker stop <container>` 可以接收到 `SIGTERM`，更方便与外部沟通。
 
-但是也因为没有 shell 进程，连变量替换这种基本功能都没有。<br >
+但是也因为没有 shell 进程，连变量替换这种基本功能都没有。
 比如，`CMD ["echo","$HOME"]`，其中的 `$HOME` 是不会正常解析的，需要写成 `CMD ["/bin/bash","-c","echo $HOME"]`
 
 ### 作为 ENTRYPOINT 的默认参数
@@ -62,7 +64,7 @@ CMD echo "hello world"
 ENTRYPOINT ["executable", "param1", "param2"]
 ```
 
-这种方式类似于 `CMD` 的 `exec form`，但是在 shell 环境下的，应该是 `/bin/sh`。<br >
+这种方式类似于 `CMD` 的 `exec form`，但是在 shell 环境下的，应该是 `/bin/sh`。
 此时 `CMD` 的内容会作为 `ENTRYPOINT` 的参数，另外，`CMD` 的内容可以被 `docker run [image]` 后面有内容覆盖。
 
     如果想覆盖 `ENTRYPOINT` 可以使用 `--entrypoint`
@@ -109,4 +111,20 @@ docker run image
 # CMD 被覆盖
 docker run image hello world
 # 无输出
+```
+
+## 总结
+
+上面分析太长可以直接跳到这里看结论...
+
+1. 使用 `ENTRYPOINT` 作为应用的启动入口
+2. 如果启动程序比较复杂（比如含有一些配置工作），可以写个 `entrypoint.sh` 放在 `ENTRYPOINT` 中
+3. `CMD` 放可变部分，作为 `ENTRYPOINT` 的默认参数
+
+比如：
+
+```Dockerfile
+FROM centos
+
+ENTRYPOINT ["bash", "/projects/entrypoint.sh"]
 ```
