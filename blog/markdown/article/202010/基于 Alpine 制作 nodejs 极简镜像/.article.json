@@ -1,0 +1,7 @@
+{
+    "name": "nodejs-image-with-alpine",
+    "title": "基于 Alpine 制作 nodejs 极简镜像",
+    "cover": "assets/alpine-cover.png",
+    "publishTime": 1601667142000,
+    "labels": ["Alpine", "Docker", "Dockerfile"]
+}
