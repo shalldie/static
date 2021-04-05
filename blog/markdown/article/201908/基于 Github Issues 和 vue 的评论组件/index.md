@@ -2,7 +2,7 @@
 
 [![npm][npm_image]][npm_url] [![travis][travis_image]][travis_url] [![gzip][gzip_image]][gzip_url] [![license][license_image]][npm_url]
 
-[vue-git-comment](https://github.com/shalldie/vue-git-comment) ，这是一个基于 `github issues` 和 `vue` 的纯前端评论组件，不需要后端。
+这是一个基于 `github issues` 和 `vue` 的纯前端评论组件，不需要服务端。
 
 效果见文章底部。
 
@@ -30,8 +30,8 @@ npm install vue-git-comment --save
 ## Usage
 
 ```js
-import "vue-git-comment/dist/vue-git-comment.css";
-import VueGitComment from "vue-git-comment";
+import 'vue-git-comment/dist/vue-git-comment.css';
+import VueGitComment from 'vue-git-comment';
 
 // var VueGitComment = window.VueGitComment;  // window
 // const VueGitComment = require('VueGitComment'); // commonjs
@@ -43,8 +43,8 @@ import VueGitComment from "vue-git-comment";
 Vue.use(VueGitComment); // global
 
 new Vue({
-  el: "body",
-  components: { VueGitComment } // local
+    el: 'body',
+    components: { VueGitComment } // local
 });
 ```
 
@@ -58,8 +58,8 @@ export default {
     data() {
         return {
             options: {
-                client_id: 'client_id',
-                client_secret: 'client_secret',
+                clientID: 'clientID',
+                clientSecret: 'clientSecret',
                 owner: '仓库所有者',
                 repo: '仓库名称',
                 uuid: '唯一标识，用于区分不同文章'
@@ -74,15 +74,18 @@ export default {
 
 评论系统基于 `github api` ， 需要 [去申请](https://github.com/settings/applications/new) 一个 `OAuth application`。
 
-| Name          |       Type        | Required |     Default      | Description                                   |
-| :------------ | :---------------: | :------: | :--------------: | :-------------------------------------------- |
-| client_id     |     `string`      |  `true`  |                  | 申请的 client_id                              |
-| client_secret |     `string`      |  `true`  |                  | 申请的 client_secret                          |
-| owner         |     `string`      |  `true`  |                  | issue 所在仓库的所有者                        |
-| repo          |     `string`      |  `true`  |                  | 仓库名称                                      |
-| uuid          |     `string`      |  `true`  |                  | 用于区分文章的唯一标识，每个评论间不能重复    |
-| title         |     `string`      | `false`  | `document.title` | issue 使用的标题，选填。 默认使用当前页面标题 |
-| language      | `en / zh-CN` | `false`  |       `en`       | 国际化语言，选填。 默认使用 `en`              |
+| Name         |     Type      | Required |     Default      | Description                                   |
+| :----------- | :-----------: | :------: | :--------------: | :-------------------------------------------- |
+| clientID     |   `string`    |  `true`  |                  | 申请的 client_id                              |
+| clientSecret |   `string`    |  `true`  |                  | 申请的 client_secret                          |
+| owner        |   `string`    |  `true`  |                  | issue 所在仓库的所有者                        |
+| repo         |   `string`    |  `true`  |                  | 仓库名称                                      |
+| uuid         |   `string`    |  `true`  |                  | 用于区分文章的唯一标识，每个评论间不能重复    |
+| title        |   `string`    | `false`  | `document.title` | issue 使用的标题，选填。 默认使用当前页面标题 |
+| language     | `en \| zh-CN` | `false`  |       `en`       | 国际化语言，选填。 默认使用 `en`              |
+| proxy        |   `string`    | `false`  |     `见下方`     | 获取 accessToken 的代理                       |
+
+默认代理使用 `https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token`
 
 ## Similar Project
 
@@ -98,7 +101,7 @@ export default {
     1.  作者自己搭了个服务去转发获取 token，我生怕哪一天...
 
         这里我用的是 [cros-anywhere](https://cors-anywhere.herokuapp.com) 去转发，
-        哪怕有一天 anywhere 也挂了，我既然明白这个问题也能迅速定位。
+        哪怕有一天 anywhere 也挂了，也可以通过自定义 proxy 来调整。
 
     2.  在移动端上稍微不太友好。
     3.  不能倒序。
@@ -124,6 +127,6 @@ gitalk 我也特地去了解了一哈，也是非常优秀的一个项目。但�
 [npm_url]: https://www.npmjs.com/package/vue-git-comment
 [travis_image]: https://img.shields.io/travis/shalldie/vue-git-comment/master.svg
 [travis_url]: https://travis-ci.org/shalldie/vue-git-comment
-[gzip_image]: https://img.badgesize.io/https://cdn.jsdelivr.net/npm/vue-git-comment@0.0.13/dist/vue-git-comment.umd.min.js?compression=gzip
-[gzip_url]: https://cdn.jsdelivr.net/npm/vue-git-comment@0.0.13/dist/vue-git-comment.umd.min.js
+[gzip_image]: https://img.badgesize.io/https://cdn.jsdelivr.net/npm/vue-git-comment@0.0.16/dist/vue-git-comment.umd.min.js?compression=gzip
+[gzip_url]: https://cdn.jsdelivr.net/npm/vue-git-comment@0.0.16/dist/vue-git-comment.umd.min.js
 [license_image]: https://img.shields.io/npm/l/vue-git-comment.svg
