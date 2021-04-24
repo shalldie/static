@@ -68,7 +68,7 @@ job.batch/helm-install-traefik   1/1           35m        41m
 安装完会明显感到机器越来越卡，输入个指令要等好久才会响应。
 ，，，后来 ssh 就直接崩了 =。= 等 15 分钟没动静，不得已重启，重启也花了 10 分钟，估计什么进程阻塞了吧，，，
 
-<img src="./assets/try_first.png" class="preview">
+<img class="preview" src="./assets/try_first.png">
 
 不过重启后貌似都 ok 了，虽然各项指标都显示服务器承受着极大的压力，cpu 或者内存都接近打满，但至少 ssh 上去看着没啥问题，，，
 
