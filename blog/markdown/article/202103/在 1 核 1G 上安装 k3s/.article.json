@@ -1,6 +1,6 @@
 {
     "name": "k3s-in-1core1g",
-    "title": "在 1 核 1G 上安装 k3s",
+    "title": "在 1 核 1G 上使用 k3s",
     "cover": "assets/cover.png",
     "publishTime": 1615793543000,
     "labels": ["k3s", "Kubernetes"]
