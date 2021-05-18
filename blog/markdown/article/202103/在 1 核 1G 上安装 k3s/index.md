@@ -38,6 +38,7 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 
 ```bash
 [root@xielaobandeos ~]# kubectl get all -n kube-system
+
 NAME                                          READY   STATUS    RESTARTS   AGE
 pod/coredns-854c77959c-l5pnm                  1/1     Running   0          2d23h
 pod/metrics-server-86cbb8457f-hzdjh           1/1     Running   0          2d23h
@@ -123,9 +124,9 @@ $ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 traefik 会监控整个 k3s 集群中的 Ingress，并为这些 Ingress 创建对应的路由，我们如果有一个服务想接入，可以在服务所在的命名空间中添加个 Ingress 即可。
 
+<!-- prettier-ignore -->
 ```yaml
 # ingress.yaml
-# prettier-ignore
 kind: Ingress
 apiVersion: extensions/v1beta1
 metadata:
@@ -145,9 +146,9 @@ spec:
 
 如果镜像位于私人仓库中，需要登录的话，可以使用 secret。
 
+<!-- prettier-ignore -->
 ```yaml
 # secret.yaml
-# prettier-ignore
 apiVersion: v1
 kind: Secret
 metadata:
@@ -166,9 +167,9 @@ stringData:
     }
 ```
 
+<!-- prettier-ignore -->
 ```yaml
 # deployment.yaml
-# prettier-ignore
 apiVersion: apps/v1
 kind: Deployment
 metadata:
