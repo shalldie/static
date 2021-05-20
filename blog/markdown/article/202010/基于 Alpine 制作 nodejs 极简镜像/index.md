@@ -49,7 +49,7 @@ docker build -t alpine-node-pm2 .
 
 国内访问 `apk` 仓库太慢，建议替换仓库地址为国内镜像。
 
-安装包记得添加 `--node-cache`，不用本地 cache 进行安装，这里也会避免生成 cache 产生无用的缓存安装文件。
+安装包记得添加 `--no-cache`，不用本地 cache 进行安装，这里也会避免生成 cache 产生无用的缓存安装文件。
 `pm2` 可以看情况添加，虽然会占用不少体积，但是我觉得 node 程序最好还是用 `pm2-runtime` 来托管。
 
 ```
