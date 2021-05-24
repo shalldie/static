@@ -1,0 +1,8 @@
+{
+    "name": "use-traefik",
+    "title": "使用 Traefik 边缘路由器",
+    "cover": "assets/traefik-cover.png",
+    "publishTime": 1616736379000,
+    "labels": ["traefik", "Kubernetes", "Docker", "nginx"],
+    "edit": true
+}
