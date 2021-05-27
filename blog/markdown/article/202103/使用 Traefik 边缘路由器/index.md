@@ -60,8 +60,8 @@ docker run -d -p 8080:8080 -p 80:80 \
 & helm install traefik traefik/traefik
 ```
 
-    想在 Kubenetes 使用通过 helm 安装最方便，traefik-helm-chart 的配置参数挺多，了解基本使用后也方便触类旁通。
-    二进制方式，和 docker 方式差不多，本文会着重介绍 docker 方式。
+想在 Kubenetes 使用通过 helm 安装最方便，traefik-helm-chart 的配置参数挺多，了解基本使用后也方便触类旁通。
+二进制方式，和 docker 方式差不多，本文会着重介绍 docker 方式。
 
 ## 配置发现
 
@@ -369,6 +369,10 @@ http:
 如果请求 `/prefix/a/b`，在 `some-service` 接收到请求的时候，就变成了 `/a/b`。
 
 ## Dashboard
+
+`Traefik` 自带了一个 `Web UI`，叫做 `Dashboard`。可以快速、便捷、直观的查看当前的所有 `entryPoints`、`routes`、`middleWares`、`balabala`
+
+<img src="./assets/traefik-dashboard.png" class="preview">
 
 `Dashboard` 的开启方式比较简单，添加 `静态配置`，就可以访问 `8080` 端口来访问了。
 
