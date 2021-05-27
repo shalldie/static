@@ -12,11 +12,11 @@ Traefik 兼容所有主流的集群技术，比如 `Docker`, `Swarm mode`, `Kube
 
     会自动监听配置文件改动，自动发现新服务接入，并更新自己的配置，无需人工重启。
 
-## 与 nginx 相比
+## 与 Nginx 相比
 
-很长一段时间我都在用 `nginx` 作为流量分发的入口，`nginx` 配置简单，快速，功能强大，成熟稳定，balabala...
+很长一段时间我都在用 `Nginx` 作为流量分发的入口，`Nginx` 配置简单，快速，功能强大，成熟稳定，balabala...
 
-如今我把应用入口换成了 `Traefik`，并不是说 `nginx` 比之差一些，而是 `Traefik` 有一些很强大的功能，作为 `边缘路由器` 更合适、更 cool，`nginx` 在其它场景下依然使用很广泛，这里列一些 `Traefik` 的优势：
+如今我把应用入口换成了 `Traefik`，并不是说 `Nginx` 比之差一些，而是 `Traefik` 有一些很强大的功能，作为 `边缘路由器` 更合适、更 cool，`Nginx` 在其它场景下依然使用很广泛，这里列一些 `Traefik` 的优势：
 
 1. 自带一个 dashboard 界面，可视化更直观。
 2. 自带 `服务发现` 能力，可自动监听配置改动、发现新服务，并自动更新无需人工重启。（像不像 Ingress？）
@@ -65,6 +65,17 @@ docker run -d -p 8080:8080 -p 80:80 \
 
 ## 配置发现
 
+配置分为 `静态配置` 和 `动态配置` 两种，`静态配置` 作为 `traefik` 的启动配置，`动态配置` 可以是完全动态的路由配置。
+
+Traefik 在启动的时候，会在以下位置中搜索名为 traefik.toml（或 traefik.yml、traefik.yaml）的文件（后文皆以 `.yml` 为例）：
+
+- `/etc/traefik/`
+- `$XDG_CONFIG_HOME/`
+- `$HOME/.config/`
+- `. (工作目录)`
+
+Traefik 会自动发现 `动态配置`，并更新自身。也被成为：`配置发现`。
+
 ### 概述
 
 Traefik 的服务发现，是通过 Providers 来实现的。
@@ -83,3 +94,172 @@ Traefik 的服务发现，是通过 Providers 来实现的。
 ### File
 
 file provider 可以让我们通过 TOML 或者 YAML 文件来定义动态配置。
+
+在 `静态配置` 中，预先声明要监听的 `文件` 或者 `文件夹`：
+
+```yaml
+providers:
+  file:
+    # 文件 跟 目录，2选1
+    # 要监听的文件
+    filename: dynamic_conf.yml
+    # 要监听的目录
+    directory: /path/to/config
+    # 允许 traefik 自动 watch 配置文件的变化
+    watch: true
+```
+
+### Docker
+
+在启动容器的时候，可以以标签的形式通知、配置，以让 Traefik 来完成自动化配置。 如果容器停止，Traefik 也会自动销毁相关配置。
+
+使用 `静态配置`，告知 `Traefik` 去监听 Docker 的生命周期。
+
+```yaml
+providers:
+  # 监听docker生命周期
+  docker:
+    # 用于连接所有容器的默认 docker 网络，默认为 empty
+    network: traefik-network
+```
+
+然后启动容器的时候添加 label，`Traefik` 会根据 label 的配置去生成对应路由。
+
+```yaml
+# docker-compose.yml
+version: '3'
+services:
+  blog:
+    image: 'xxx:latest'
+    labels:
+      - traefik.http.routers.blog.rule=PathPrefix(`/`)
+      - traefik.http.services.blog.loadbalancer.server.port=8080
+networks:
+  default:
+    name: traefik-network
+    external: true
+```
+
+以上的 labels 会生成如下动态配置：
+
+```yaml
+http:
+  # 生成一个 router 规则
+  routers:
+    blog:
+      rule: 'PathPrefix(`/`)'
+      service: blog
+  # 生成一个 service，并配置访问的 port
+  services:
+    blog:
+      loadBalancer:
+        servers:
+          - url: 'http://traefik-network:8080'
+```
+
+### Kubernetes
+
+在 k8s 中使用 Traefik 作为 Ingress Controller 是一个不错的选择，新加路由只用加一个普通的 Ingress 配置文件：
+
+```yaml
+# ingress.yaml
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: ingress-traefik
+  namespace: xxx
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: some-name
+              servicePort: some-port
+```
+
+使用 helm 安装 Traefik 是一种很方便的方式，可以参考：[https://github.com/traefik/traefik-helm-chart](https://github.com/traefik/traefik-helm-chart)
+
+## 路由和负载均衡
+
+### 概览
+
+#### 流量流转
+
+当请求进来当时候我们看下发生了啥，这样更有助于理解 Traefik 的一些概念。
+
+1. 在我们启动 Traefik 的时候，我们要定义 `entrypoints`（静态配置），表示流量的入口。
+2. 然后连接到 `entrypoints` 的 `routes` 去判断是否符合定义的规则。
+3. 如果符合，就用 `middleware` 中间件去处理下。
+4. 最后把流量打到 `services` 上面。
+
+<img src="./assets/traefik-route.png" class="preview">
+
+#### 各部分职责：
+
+- `Providers` 来发现基础设施上存在的服务（它们的 IP、运行状况等...）
+- `Entrypoints` 监听 `traffic` 的流量入口 (ports, ...)
+- `Routers` 分析请求 (host, path, headers, SSL, ...)
+- `Middlewares` 会把请求做一些调整 (authentication, rate limiting, headers, ...)
+
+#### 示例
+
+我们用 `File Provider` 来看一个完整的例子，首先是 `静态配置`：
+
+```yaml
+entryPoints:
+  web:
+    # 监听 8081 端口的请求
+    address: :8081
+
+providers:
+  # 配置 file provider 监听目录，可以动态定义 routers / middlewares / services
+  file:
+    directory: /path/to/dynamic/conf
+    watch: true
+```
+
+然后我们就可以在 `/path/to/dynamic/conf` 目录中去定义 `动态配置`：
+
+```yaml
+# http 路由部分
+http:
+  routers:
+    # 定义一个路由去处理请求
+    to-whoami:
+      # 路由的规则是 Host:example.com，而且请求是 /whoami/ 开头
+      rule: 'Host(`example.com`) && PathPrefix(`/whoami/`)'
+      # 如果规则匹配上，就用以下中间件处理
+      middlewares:
+        - test-user
+      # 最后再把流量打到 `whoami` 的服务上。
+      service: whoami
+
+  middlewares:
+    # 定义一个中间件，用来验证用户身份。中间件可以在这里查阅：https://doc.traefik.io/traefik/middlewares/overview/
+    test-user:
+      basicAuth:
+        users:
+          - test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/
+
+  services:
+    # 定义一个服务，以及如何把它跟现有服务关联起来
+    whoami:
+      loadBalancer:
+        servers:
+          - url: http://private/whoami-service
+```
+
+### EntryPoints
+
+`EntryPoints` 就是 `Traefik` 的流量入口，定义了监听哪个端口，或者监听 TCP 还是 UDP。
+
+```yaml
+# example
+```
+
+## HTTPS
+
+## 中间件
+
+## Dashboard

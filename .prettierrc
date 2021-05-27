@@ -5,5 +5,13 @@
     "endOfLine": "auto",
     "printWidth": 120,
     "bracketSpacing": true,
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "overrides": [
+        {
+            "files": ["*.yaml", "*.yml", "*.md"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }

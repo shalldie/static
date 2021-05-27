@@ -1,10 +1,10 @@
 {
     "name": "nginx-location",
-    "title": "nginx location 匹配",
+    "title": "Nginx location 匹配",
     "cover": "assets/cover.png",
     "publishTime": 1585905753000,
     "labels": [
-        "nginx",
+        "Nginx",
         "location"
     ]
 }

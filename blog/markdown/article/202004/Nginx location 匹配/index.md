@@ -1,6 +1,6 @@
-# nginx location 匹配
+# Nginx location 匹配
 
-nginx 经常用，不过一直感觉配置挺玄学，，，以往都贯彻 `“能用就行”` 的原则，不求甚解。
+Nginx 经常用，不过一直感觉配置挺玄学，，，以往都贯彻 `“能用就行”` 的原则，不求甚解。
 
 今天把 location 部分整理下，供以后查阅。
 
@@ -8,7 +8,7 @@ nginx 经常用，不过一直感觉配置挺玄学，，，以往都贯彻 `“
 
 `location` 模块 一般位于 `http/server` 下，用于对请求的分发处理。
 
-```nginx
+```Nginx
 http {
     gzip on;
     # ...
@@ -26,7 +26,7 @@ http {
 
 ## 语法
 
-```nginx
+```Nginx
 location [=|~|~*|^~|@] /uri/ {...}
 ```
 
@@ -48,7 +48,7 @@ location [=|~|~*|^~|@] /uri/ {...}
 
     - 这个和普通匹配规则类似，但是优先级如右：`[普通] < [正则] < [^~]`
 
-5. `@` 仅表示用 nginx 服务内部请求之间的重定向，不讨论了。
+5. `@` 仅表示用 Nginx 服务内部请求之间的重定向，不讨论了。
 
 ## URL 尾部的 /
 
@@ -83,7 +83,7 @@ proxy_pass 后面的地址，`host:port` 后面如果有 `任意以/开头的字
 
 example:
 
-```nginx
+```Nginx
 # 1. 无 uri， `[proxy_pass][location][location_postfix]`
 server {
     listen 80;
@@ -135,7 +135,7 @@ server {
 
 example:
 
-```nginx
+```Nginx
 location /download/ {
     root /opt/web/html/;
 }
@@ -153,7 +153,7 @@ location /download/ {
 
 example:
 
-```nginx
+```Nginx
 location /download/ {
     alias /opt/web/html/;
 }
@@ -168,7 +168,7 @@ location /download/ {
 
 有时访问站点的 URI 是 /，这种情况一般返回首页。 这与上述的 root、alias 都不同。
 
-```nginx
+```Nginx
 location / {
     root path;
     index index.html index.php;
@@ -183,7 +183,7 @@ location / {
 
 如果应用使用 history 路由，那么对于请求能用 url 找到就返回这个资源，否则返回 /index.html。
 
-```nginx
+```Nginx
 location /app {
     root /root/www/;
     try_files $uri /index.html =404;
