@@ -1,6 +1,6 @@
 # 使用 Traefik 边缘路由器
 
-![Traefik](./assets/traefik-cover.png)
+<img src="./assets/traefik-cover.png">
 
 ## 简介
 
@@ -256,10 +256,125 @@ http:
 
 ```yaml
 # example
+## 静态配置
+entryPoints:
+  web:
+    address: ':80'
+
+  web-secure:
+    address: ':443'
+```
+
+### Routers
+
+`Routers` 负责将请求转发到指定服务，可以将指定 `EntryPoints` 的，符合自己规则 `Rules` 的请求，经过中间件 `Middlewares` 处理后，转发到指定的 `Service` 上面。
+
+```yaml
+## 动态配置
+http:
+  routers:
+    router-name:
+      # 监听指定 entryPoints，默认所有
+      entryPoints:
+        - 'websecure'
+        - 'other'
+      # 指定该路由规则
+      rule: 'Host(`traefik.io`) && Path(`/traefik`))'
+      # 指定服务
+      service: 'service-name'
+```
+
+### Services
+
+`Services` 负责配置如何获取最终将处理传入请求的实际服务。
+
+```yaml
+## 动态配置
+http:
+  services:
+    service-name:
+      loadBalancer:
+        # loadBalancer 会将流量在多个实例间进行负载均衡
+        servers:
+          - url: 'http://private-ip-server-1'
+          - url: 'http://private-ip-server-2'
 ```
 
 ## HTTPS
 
+`Traefik` 可以使用 `ACME` 自动获取证书，其它方式暂不赘述。
+
+... 直接看例子吧，注释多。
+
+```yaml
+# entrypoints，入口
+entryPoints:
+  # http, 80 端口
+  web:
+    address: :80
+    http:
+      # 会重定向到 https
+      # https://doc.traefik.io/traefik/routing/entrypoints/#redirection
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  # https, 443 端口
+  websecure:
+    address: :443
+    http:
+      tls:
+        certResolver: nosaidResolver
+        domains:
+          - main: nosaid.com
+            sans:
+              - www.nosaid.com
+
+# https://doc.traefik.io/traefik/https/acme/#httpchallenge
+certificatesResolvers:
+  nosaidResolver:
+    acme:
+      email: hi.xieshuang@gmail.com
+      storage: /etc/traefik/acme.json # 要存储的位置，如果使用 docker 记得添加 volume
+      httpChallenge:
+        entryPoint: web # 对于 http 的请求使用 httpChallenge 方式获取证书
+```
+
 ## 中间件
 
+通过附加到路由，中间件可以在请求发送到服务之前来调整请求。
+中间件被附件到路由上，是一种在请求发送到你的 服务 之前（或者在服务的响应发送到客户端之前）调整请求的一种方法。
+
+Traefik 内置了许多不同功能的中间件，可以修改请求，头信息，重定向，添加身份验证等等。
+
+中间件可以通过链式组合的方式来满足业务需求。
+
+```yaml
+http:
+  routers:
+    ttyd-router:
+      rule: 'PathPrefix(`/prefix`)'
+      service: some-service
+      middlewares:
+        - prefix-middleware
+
+  middlewares:
+    prefix-middleware:
+      stripPrefix:
+        prefixes:
+          - '/prefix'
+```
+
+比如上面例子中，中间件就会抹去 `/prefix` 前缀。
+如果请求 `/prefix/a/b`，在 `some-service` 接收到请求的时候，就变成了 `/a/b`。
+
 ## Dashboard
+
+`Dashboard` 的开启方式比较简单，添加 `静态配置`，就可以访问 `8080` 端口来访问了。
+
+```yaml
+# 开启 dashboard
+# https://doc.traefik.io/traefik/operations/dashboard/#insecure-mode
+api:
+  insecure: true
+```

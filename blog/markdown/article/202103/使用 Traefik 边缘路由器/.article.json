@@ -3,6 +3,5 @@
     "title": "使用 Traefik 边缘路由器",
     "cover": "assets/traefik-cover.png",
     "publishTime": 1616736379000,
-    "labels": ["Traefik", "Kubernetes", "Docker", "Nginx"],
-    "edit": true
+    "labels": ["Traefik", "Kubernetes", "Docker"]
 }
