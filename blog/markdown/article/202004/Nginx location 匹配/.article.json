@@ -3,8 +3,5 @@
     "title": "Nginx location 匹配",
     "cover": "assets/cover.png",
     "publishTime": 1585905753000,
-    "labels": [
-        "Nginx",
-        "location"
-    ]
+    "labels": ["Nginx"]
 }
