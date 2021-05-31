@@ -382,3 +382,9 @@ http:
 api:
   insecure: true
 ```
+
+## 参考
+
+[Traefik Official Document](https://doc.traefik.io/traefik/)
+
+[一文搞懂 Traefik2.1 的使用](https://www.qikqiak.com/post/traefik-2.1-101/)
