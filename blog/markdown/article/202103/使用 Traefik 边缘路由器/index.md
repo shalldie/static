@@ -4,9 +4,8 @@
 
 ## 简介
 
-`Traefik` 是一个现代化的反向代理、负载均衡工具，使得微服务的部署更加容易。
-
-Traefik 兼容所有主流的集群技术，比如 `Docker`, `Swarm mode`, `Kubernetes`, `Marathon`, `Consul`, `Etcd`, `Rancher`, `Amazon ECS`, `...`
+> `Traefik` 是一个现代化的反向代理、负载均衡工具，使得微服务的部署更加容易。
+> `Traefik` 兼容所有主流的集群技术，比如 `Docker`, `Swarm mode`, `Kubernetes`, `Marathon`, `Consul`, `Etcd`, `Rancher`, `Amazon ECS`, `...`
 
 最吸引我的是，它的配置是 `自动` 且 `动态` 的，用人话说就是：
 
@@ -65,9 +64,8 @@ docker run -d -p 8080:8080 -p 80:80 \
 
 ## 配置发现
 
-配置分为 `静态配置` 和 `动态配置` 两种，`静态配置` 作为 `traefik` 的启动配置，`动态配置` 可以是完全动态的路由配置。
-
-Traefik 在启动的时候，会在以下位置中搜索名为 traefik.toml（或 traefik.yml、traefik.yaml）的文件（后文皆以 `.yml` 为例）：
+> 配置分为 `静态配置` 和 `动态配置` 两种，`静态配置` 作为 `traefik` 的启动配置，`动态配置` 可以是完全动态的路由配置。
+> `Traefik` 在启动的时候，会在以下位置中搜索名为 `traefik.toml`（或 `traefik.yml`、`traefik.yaml`）的文件（后文皆以 `.yml` 为例）：
 
 - `/etc/traefik/`
 - `$XDG_CONFIG_HOME/`
@@ -342,8 +340,8 @@ certificatesResolvers:
 
 ## 中间件
 
-通过附加到路由，中间件可以在请求发送到服务之前来调整请求。
-中间件被附件到路由上，是一种在请求发送到你的 服务 之前（或者在服务的响应发送到客户端之前）调整请求的一种方法。
+> 通过附加到路由，中间件可以在请求发送到服务之前来调整请求。
+> 中间件被附件到路由上，是一种在请求发送到你的 服务 之前（或者在服务的响应发送到客户端之前）调整请求的一种方法。
 
 Traefik 内置了许多不同功能的中间件，可以修改请求，头信息，重定向，添加身份验证等等。
 

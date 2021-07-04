@@ -2,10 +2,10 @@
 
 <img src="assets/cover.jpg">
 
-    最近给一些老项目用的 `rollup` 升了个级，发现 `2.x` 的好多依赖包都换名字了... 颇费了些功夫，必须做个记录。
-    吐槽：
-    中文版文档太老了，还是1.x的，很久很久没人更新。
-    官网英文版的一些demo也跑不起来 =。=
+> 最近给一些老项目用的 `rollup` 升了个级，发现 `2.x` 的好多依赖包都换名字了... 颇费了些功夫，必须做个记录。
+> 吐槽：
+> 中文版文档太老了，还是 1.x 的，很久很久没人更新。
+> 官网英文版的一些 demo 也跑不起来 =。=
 
 ## 概述
 
@@ -55,14 +55,14 @@ $ vim rollup.config.js
 
 ```ts
 export default {
-    input: 'src/main.js',
-    output: {
-        file: 'bundle.js',
-        format: 'cjs'
-    },
-    plugins: [
-        // ...
-    ]
+  input: 'src/main.js',
+  output: {
+    file: 'bundle.js',
+    format: 'cjs'
+  },
+  plugins: [
+    // ...
+  ]
 };
 ```
 
@@ -72,9 +72,9 @@ $ vim package.json
 
 ```json
 {
-    "scripts": {
-        "build": "rollup -c"
-    }
+  "scripts": {
+    "build": "rollup -c"
+  }
 }
 ```
 
@@ -104,42 +104,42 @@ $ npm run build
 
 1. `@babel/core` ，babel 核心文件
 2. `@babel/preset-env`，垫片（preset），提供了自动转化语法的能力
-    - `core-js` ，如果需要 `polyfill`
-    - 以下这部分，如果使用 `typescript` 的话是不需要安装的
-    - `@babel/plugin-proposal-class-properties` ，class 的字段相关新特性，比如初始化赋值
-    - `@babel/plugin-proposal-decorators` ，使用装饰器
-    - `@babel/plugin-proposal-object-rest-spread`，对象展开操作符
+   - `core-js` ，如果需要 `polyfill`
+   - 以下这部分，如果使用 `typescript` 的话是不需要安装的
+   - `@babel/plugin-proposal-class-properties` ，class 的字段相关新特性，比如初始化赋值
+   - `@babel/plugin-proposal-decorators` ，使用装饰器
+   - `@babel/plugin-proposal-object-rest-spread`，对象展开操作符
 
 这是一个配置例子：
 
 ```ts
 pluins: [
-    // ...
-    babelPlugin({
-        babelrc: false, // 或者使用独立文件 `.babelrc`
-        babelHelpers: 'bundled',
-        presets: [
-            [
-                '@babel/preset-env',
-                polyfill
-                    ? {
-                          useBuiltIns: 'usage',
-                          modules: false,
-                          corejs: 3
-                      }
-                    : {}
-            ]
+  // ...
+  babelPlugin({
+    babelrc: false, // 或者使用独立文件 `.babelrc`
+    babelHelpers: 'bundled',
+    presets: [
+      [
+        '@babel/preset-env',
+        polyfill
+          ? {
+              useBuiltIns: 'usage',
+              modules: false,
+              corejs: 3
+            }
+          : {}
+      ]
+    ],
+    plugins: useTypescript
+      ? []
+      : [
+          '@babel/plugin-proposal-object-rest-spread',
+          ['@babel/plugin-proposal-decorators', { legacy: true }],
+          ['@babel/plugin-proposal-class-properties', { loose: true }]
         ],
-        plugins: useTypescript
-            ? []
-            : [
-                  '@babel/plugin-proposal-object-rest-spread',
-                  ['@babel/plugin-proposal-decorators', { legacy: true }],
-                  ['@babel/plugin-proposal-class-properties', { loose: true }]
-              ],
-        include: ['src/**'],
-        extensions: [...DEFAULT_EXTENSIONS, 'ts']
-    })
+    include: ['src/**'],
+    extensions: [...DEFAULT_EXTENSIONS, 'ts']
+  })
 ];
 ```
 

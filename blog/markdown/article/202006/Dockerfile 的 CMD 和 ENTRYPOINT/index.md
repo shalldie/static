@@ -9,13 +9,13 @@
 
 ## CMD
 
-根据 [docker 官网文档](https://docs.docker.com/engine/reference/builder/#cmd) 来看，`CMD` 有 3 种用法：
+> 根据 [docker 官网文档](https://docs.docker.com/engine/reference/builder/#cmd) 来看，`CMD` 有 3 种用法：
+>
+> - `CMD ["executable","param1","param2"]` （`exec form`，官方推荐的使用方式）
+> - `CMD ["param1","param2"]` （作为默认参数，给 `ENTRYPOINT` 使用）
+> - `CMD command param1 param2` （`shell form`）
 
--   `CMD ["executable","param1","param2"]` （`exec form`，官方推荐的使用方式）
--   `CMD ["param1","param2"]` （作为默认参数，给 `ENTRYPOINT` 使用）
--   `CMD command param1 param2` （`shell form`）
-
-    `Dockerfile` 中只能有一个 `CMD` 声明，如果有多个只有最后一个会生效。
+`Dockerfile` 中只能有一个 `CMD` 声明，如果有多个只有最后一个会生效。
 
 ### exec form
 
@@ -52,7 +52,7 @@ CMD echo "hello world"
 
 ## ENTRYPOINT
 
-    An `ENTRYPOINT` allows you to configure a container that will run as an executable.
+> An `ENTRYPOINT` allows you to configure a container that will run as an executable.
 
 从 [这句话](https://docs.docker.com/engine/reference/builder/#entrypoint) 中可以看出，`ENTRYPOINT` 才是定义容器启动后的执行体的，虽然 `CMD` 在一些场景上也能实现 `入口` 的作用，但本质上 `ENTRYPOINT` 才是入口，`CMD` 是入口的 `参数`。
 
@@ -115,11 +115,11 @@ docker run image hello world
 
 ## 总结
 
-上面分析太长可以直接跳到这里看结论...
-
-1. 使用 `ENTRYPOINT` 作为应用的启动入口
-2. 如果启动程序比较复杂（比如含有一些配置工作），可以写个 `entrypoint.sh` 放在 `ENTRYPOINT` 中
-3. `CMD` 放可变部分，作为 `ENTRYPOINT` 的默认参数
+> 上面分析太长可以直接跳到这里看结论...
+>
+> 1.  使用 `ENTRYPOINT` 作为应用的启动入口
+> 2.  如果启动程序比较复杂（比如含有一些配置工作），可以写个 `entrypoint.sh` 放在 `ENTRYPOINT` 中
+> 3.  `CMD` 放可变部分，作为 `ENTRYPOINT` 的默认参数
 
 比如：
 

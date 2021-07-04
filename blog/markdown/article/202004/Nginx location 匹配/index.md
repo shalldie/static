@@ -34,19 +34,19 @@ location [=|~|~*|^~|@] /uri/ {...}
 
 1. `=` 表示 URI 作为字符串，与参数中的 uri 做完全匹配。
 
-    - 感觉用的地方不多
+   - 感觉用的地方不多
 
 2. `~` 表示区分大小写的正则匹配。
 
-    - 可以使用 `$1` （\$ + groupIndex）来取子组
+   - 可以使用 `$1` （\$ + groupIndex）来取子组
 
 3. `~*` 表示不区分大小写的正则匹配。
 
-    - 同上
+   - 同上
 
 4. `^~` 前缀匹配。目的是优先于正则表达式的匹配。
 
-    - 这个和普通匹配规则类似，但是优先级如右：`[普通] < [正则] < [^~]`
+   - 这个和普通匹配规则类似，但是优先级如右：`[普通] < [正则] < [^~]`
 
 5. `@` 仅表示用 Nginx 服务内部请求之间的重定向，不讨论了。
 
@@ -57,23 +57,22 @@ location [=|~|~*|^~|@] /uri/ {...}
 ### location 尾部的 /
 
 1. location 尾部没有 `/` 时。
-    - 以 `location /a/b` 为例。
-    - 可以匹配：
-        - `/a/bc`
-        - `/a/b/c`
+   - 以 `location /a/b` 为例。
+   - 可以匹配：
+     - `/a/bc`
+     - `/a/b/c`
 2. location 尾部有 `/` 时，表示一个目录。
-    - 以 `location /a/b/` 为例。
-    - 可以匹配：
-        - `/a/b/`
-        - `/a/b/c`
-    - 不能匹配：
-        - `/a/bc`
+   - 以 `location /a/b/` 为例。
+   - 可以匹配：
+     - `/a/b/`
+     - `/a/b/c`
+   - 不能匹配：
+     - `/a/bc`
 
 ### proxy_pass 尾部的 /
 
-严格来说并不是以 proxy_pass 后面的 url 是否添加 `/` 来判断匹配。
-
-proxy_pass 后面的地址，`host:port` 后面如果有 `任意以/开头的字符串`，就表示有 uri，实际转发规则如下：
+> 严格来说并不是以 proxy_pass 后面的 url 是否添加 `/` 来判断匹配。
+> proxy_pass 后面的地址，`host:port` 后面如果有 `任意以/开头的字符串`，就表示有 uri，实际转发规则如下：
 
 1. 无 uri， `[proxy_pass][location][location_postfix]`
 
@@ -125,13 +124,13 @@ server {
 
 ### 文件路径的定义
 
-有 root 和 alias 两种方式，差别是 root 会保留 [location] 的匹配，而 alias 会去掉。
+> 有 root 和 alias 两种方式，差别是 root 会保留 [location] 的匹配，而 alias 会去掉。
 
 #### root
 
--   语法： root path;
--   默认： root html;
--   配置块： http、server、location、if
+- 语法： root path;
+- 默认： root html;
+- 配置块： http、server、location、if
 
 example:
 
@@ -148,8 +147,8 @@ location /download/ {
 
 #### alias
 
--   语法： alias path;
--   配置块： location
+- 语法： alias path;
+- 配置块： location
 
 example:
 

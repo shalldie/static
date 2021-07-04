@@ -8,7 +8,7 @@ AWK 是一种优良的文本处理工具，它允许创建简短的程序，这�
 
 ## AWK 的程序结构
 
-AWK 程序是由 `pattern { action }` **对** 组成的，其中 `pattern` 表示匹配条件，只有符合条件的行才会被 AWK 处理。
+> AWK 程序是由 `pattern { action }` **对** 组成的，其中 `pattern` 表示匹配条件，只有符合条件的行才会被 AWK 处理。
 
 `pattern` 和 `action` 都是可选的，无 `pattern` 表示无匹配条件，而无 `action` 默认打印原始内容。
 
