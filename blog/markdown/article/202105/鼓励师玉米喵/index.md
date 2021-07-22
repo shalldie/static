@@ -19,6 +19,12 @@
 
 <img class="preview" src="./assets/yumi-fz.jpg">
 
+## 华南虎出巡
+
+    睡饱了自然要抖擞抖擞精神，巡视领地
+
+<img class="preview" src="./assets/yumi-hnhcx.jpg">
+
 ## 乖巧
 
     玉米经常就坐在门口，眼巴巴的望着来往的人，等待着小鱼干 🐟
@@ -36,6 +42,12 @@
     在等待的过程中闲的没事也会舔手手，prprpr...
 
 <img class="preview" src="./assets/yumi-prprpr.jpg">
+
+## 虫猫
+
+    等待的累了，趴着，手手都看不见了...跟一只虫🐛一样
+
+<img class="preview" src="./assets/yumi-chong.jpg">
 
 ## 尾巴
 
