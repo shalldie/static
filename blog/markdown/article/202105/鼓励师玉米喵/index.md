@@ -21,7 +21,7 @@
 
 ## 华南虎出巡
 
-    睡饱了自然要抖擞抖擞精神，巡视领地
+    睡饱了自然要抖擞抖擞精神，巡视领地，虎虎生威
 
 <img class="preview" src="./assets/yumi-hnhcx.jpg">
 
