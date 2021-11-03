@@ -1,0 +1,8 @@
+{
+    "name": "service-separate-logic-ui",
+    "title": "Service - 业务与 UI 分离",
+    "cover": "assets/cover.png",
+    "publishTime": 1621537962000,
+    "labels": ["javascript"],
+    "edit": true
+}
