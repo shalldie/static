@@ -65,6 +65,12 @@
 
 <img class="preview" src="./assets/yumi-jtgl.jpg">
 
+## 这该死的肥美
+
+    越来越胖了
+
+<img class="preview" src="./assets/yumi-zgsdfm.jpg">
+
 ## 打呵欠
 
     把玉米打呵欠的照片贴在工位，上班的时候陪着她一起打呵欠...
