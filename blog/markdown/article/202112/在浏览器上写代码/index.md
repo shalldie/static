@@ -162,6 +162,10 @@ Password: echo $(kubectl get secret --namespace default code-server -o jsonpath=
 
 如图所示，选择 `从 VSIX 安装...`
 
-## ALL DONE
+## 参考
 
-到此所有内容都已经搞定，愉快的 code 起来吧
+[Github code-server](https://github.com/cdr/code-server)
+
+[Coder Docs](https://coder.com/docs/code-server/latest)
+
+[VSCode Online 的安裝与配置](https://zhuanlan.zhihu.com/p/342964881)
