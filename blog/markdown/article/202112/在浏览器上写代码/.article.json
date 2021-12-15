@@ -3,6 +3,5 @@
     "title": "在浏览器上写代码",
     "cover": "assets/cover.png",
     "publishTime": 1639559512661,
-    "labels": ["Kubernetes", "code-server"],
-    "edit": true
+    "labels": ["Kubernetes", "code-server"]
 }
