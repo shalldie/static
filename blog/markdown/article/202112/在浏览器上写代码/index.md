@@ -162,7 +162,9 @@ Password: echo $(kubectl get secret --namespace default code-server -o jsonpath=
 
 如图所示，选择 `从 VSIX 安装...`
 
-## 参考
+## 相关
+
+[我使用的 Helm Chart](https://github.com/shalldie/helm-charts/tree/master/code-server)
 
 [Github code-server](https://github.com/cdr/code-server)
 
