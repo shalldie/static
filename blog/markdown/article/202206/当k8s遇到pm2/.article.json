@@ -1,0 +1,7 @@
+{
+    "name": "pm2-in-k8s",
+    "title": "当 k8s 遇到 pm2",
+    "cover": "assets/k8spm2.png",
+    "publishTime": 1655090930032,
+    "labels": ["Kubernetes", "pm2"]
+}
