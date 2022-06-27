@@ -71,6 +71,12 @@
 
 <img class="preview" src="./assets/yumi-zgsdfm.jpg">
 
+## 菜单
+
+    这张让我想起左庭右院的菜单 =。=
+
+<img class="preview" src="./assets/yumi-cd.jpg">
+
 ## 打呵欠
 
     把玉米打呵欠的照片贴在工位，上班的时候陪着她一起打呵欠...
