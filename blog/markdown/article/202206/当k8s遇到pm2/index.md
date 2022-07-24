@@ -104,6 +104,19 @@ npm timing config:load:file:/root/.npmrc Completed in 0ms
 ...
 ```
 
+## 偶遇的 bug
+
+## in nuxt@2
+
+<img class="preview" src="./assets/nuxtbug.png">
+
+> 如果使用 `pm2-runtime start ecosystem.config.js` 来启动，
+> `nuxt start` 会将启动时传入的配置文件当成项目的目录进行嵌套，导致找不到最终构建的应用文件而出现报错。
+> 哪怕已经在 `ecosystem.config.js` 中配置了 `cwd` 也不行，，，
+
+此为 nuxt 的 bug，耽误我许久 =。=
+我的解决方式是使用 `pm2 start` 代替 `pm2-runtime`，主线程用 `nginx -g "daemon off;"` 来 hang 住。
+
 ## 参考
 
 https://www.voidking.com/dev-k8s-pm2/
