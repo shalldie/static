@@ -115,7 +115,7 @@ npm timing config:load:file:/root/.npmrc Completed in 0ms
 > 哪怕已经在 `ecosystem.config.js` 中配置了 `cwd` 也不行，，，
 
 此为 nuxt 的 bug，耽误我许久 =。=
-我的解决方式是使用 `pm2 start` 代替 `pm2-runtime`，主线程用 `nginx -g "daemon off;"` 来 hang 住。
+我的解决方式是使用 `pm2 start` 代替 `pm2-runtime`，主进程用 `nginx -g "daemon off;"` 来 hang 住。
 
 ## 参考
 
