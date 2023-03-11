@@ -1,0 +1,16 @@
+{
+  "name": "@nosaid/static",
+  "version": "0.0.1",
+  "description": "Repository for saving static files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "files": [
+    "blog"
+  ],
+  "license": "MIT"
+}
