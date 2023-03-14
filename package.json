@@ -1,6 +1,6 @@
 {
   "name": "@nosaid/static",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Repository for saving static files.",
   "main": "index.js",
   "scripts": {
