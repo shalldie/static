@@ -52,7 +52,7 @@ docker build -t alpine-node-pm2 .
 安装包记得添加 `--no-cache`，不用本地 cache 进行安装，这里也会避免生成 cache 产生无用的缓存安装文件。
 `pm2` 可以看情况添加，虽然会占用不少体积，但是我觉得 node 程序最好还是用 `pm2-runtime` 来托管。
 
-```
+```bash
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 alpine-node-pm2     latest              b49a6aa7bdc1        1 minutes ago       94MB
 alpine-node         latest              f0fe9198b087        1 minutes ago       60.9MB

@@ -3,8 +3,8 @@
 > 业务逻辑与 UI 分离，在服务端人士看来一般理所当然，似乎事情本来就应该这样。
 > 但是在前端领域延伸出了另一条路：`UI组件` 和 `业务组件`。
 
-- `UI组件`（基础组件） 负责提供基础展示、交互能力，拥有极大的复用性。
-- `业务组件` 在 `UI组件` 的基础上，添加了定制化的展示，以及业务逻辑。通常很难复用。
+-   `UI组件`（基础组件） 负责提供基础展示、交互能力，拥有极大的复用性。
+-   `业务组件` 在 `UI组件` 的基础上，添加了定制化的展示，以及业务逻辑。通常很难复用。
 
 业务会分散到多个、甚至多层次的组件中去，在业务复杂后应该还要找一个 `store` 来完成状态管理。
 随着时间增加，UI 逻辑和业务逻辑纠缠不清，出现了 _跨层级传值_、_兄弟组件间传值_、_调用不相干组件间方法_ 等奇葩需求。
@@ -12,7 +12,7 @@
 就像这样，点击一个删除按钮后，想让【List】执行 refresh 方法：
 
 ```
-                                         ...
+                                        ...
 
                                          ▲
   ┌──────────┐      ┌────────────┐       │             ┌────────────┐
@@ -80,13 +80,13 @@
 
 ```ts
 export class SomeService {
-  state = {
-    show: true
-  };
+    state = {
+        show: true
+    };
 
-  toggle() {
-    this.state.show = !this.state.show;
-  }
+    toggle() {
+        this.state.show = !this.state.show;
+    }
 }
 ```
 
@@ -113,13 +113,13 @@ export class SomeService {
 const key = Symbol();
 
 function useSomeService<T>() {
-  let instance = inject<InstanceType<T>>(key, null as any);
-  if (!instance) {
-    instance = new SomeService();
-    reactive(instance.state);
-    provide(key, instance);
-  }
-  return instance;
+    let instance = inject<InstanceType<T>>(key, null as any);
+    if (!instance) {
+        instance = new SomeService();
+        reactive(instance.state);
+        provide(key, instance);
+    }
+    return instance;
 }
 ```
 
@@ -134,10 +134,10 @@ function useSomeService<T>() {
 ```html
 <!-- use in template -->
 <template>
-  <div>
-    <button @click="() => svc.toggle()">update</button>
-    <span v-if="svc.state.show">...</span>
-  </div>
+    <div>
+        <button @click="() => svc.toggle()">update</button>
+        <span v-if="svc.state.show">...</span>
+    </div>
 </template>
 ```
 
@@ -151,15 +151,15 @@ function useSomeService<T>() {
 
 ```ts
 export class SomeService {
-  state = {
-    show: true
-  };
+    state = {
+        show: true
+    };
 
-  toggle() {
-    this.setState({
-      show: !this.state.show
-    });
-  }
+    toggle() {
+        this.setState({
+            show: !this.state.show
+        });
+    }
 }
 ```
 
@@ -182,17 +182,17 @@ react 同样有 `provide/inject`，这个不谈了。
 
 ```tsx
 function AppBase() {
-  // 在包一层之后，当前及其子组件，都可以使用 `userService` 获取相同的实例
-  const svc = useService();
+    // 在包一层之后，当前及其子组件，都可以使用 `userService` 获取相同的实例
+    const svc = useService();
 
-  const show = useMemo(() => svc.state.show, [svc]);
+    const show = useMemo(() => svc.state.show, [svc]);
 
-  return (
-    <>
-      <button onClick={() => svc.toggle()}></button>
-      {show && <span>...</span>}
-    </>
-  );
+    return (
+        <>
+            <button onClick={() => svc.toggle()}></button>
+            {show && <span>...</span>}
+        </>
+    );
 }
 ```
 
@@ -203,15 +203,15 @@ function AppBase() {
 ## 我所期望的状态管理
 
 1. 可以区分 全局/业务级
-   - 全局是单例
-   - 业务级有生命周期
+    - 全局是单例
+    - 业务级有生命周期
 2. 有一个 reactive 的 state ，随便你在哪里用
 3. 有对应的业务方法，供对应业务组件使用
-   - 大部分业务应该放在 service 里面声明。 `service.method()`
-   - 不需要 props, emit, dispatch。 组件间传值可以是多余的。
+    - 大部分业务应该放在 service 里面声明。 `service.method()`
+    - 不需要 props, emit, dispatch。 组件间传值可以是多余的。
 4. 使用简单，不要有太多概念，可以用常规优化方式
-   - 我不想知道 `mutations`, `actions`, `dispatch`, `reducer`, `combineXXX`...
-   - `时间旅行` 等概念很强大，但是 `99%` 的情况用不上，不需要。
+    - 我不想知道 `mutations`, `actions`, `dispatch`, `reducer`, `combineXXX`...
+    - `时间旅行` 等概念很强大，但是 `99%` 的情况用不上，不需要。
 
 ## 不仅仅是 store，更是 service
 
