@@ -119,12 +119,8 @@ npm timing config:load:file:/root/.npmrc Completed in 0ms
 
 ## 参考
 
-https://www.voidking.com/dev-k8s-pm2/
-
-https://github.com/Unitech/pm2/issues/3271
-
-https://github.com/Unitech/pm2/pull/4889
-
-https://www.cnblogs.com/yaohong/p/16002922.html
-
+https://www.voidking.com/dev-k8s-pm2/ <br>
+https://github.com/Unitech/pm2/issues/3271 <br>
+https://github.com/Unitech/pm2/pull/4889 <br>
+https://www.cnblogs.com/yaohong/p/16002922.html <br>
 https://www.elastic.io/nodejs-as-pid-1-under-docker-images/

@@ -20,9 +20,9 @@
 
 原本更倾向于直接使用 vscode ，毕竟更官方。但是在尝试、发现以下几个因素后，还是选择了 `code-server`：
 
-- vscode 如今的版本已经没 `yarn web` 指令，在摸索新版本的过程中发现依赖包很多很多，装不上，，，
-- 鉴权是绕不开的门槛，`code-server` 已经自带。
-- `code-server` 已经有完备的生态，适配多种环境。
+-   vscode 如今的版本已经没 `yarn web` 指令，在摸索新版本的过程中发现依赖包很多很多，装不上，，，
+-   鉴权是绕不开的门槛，`code-server` 已经自带。
+-   `code-server` 已经有完备的生态，适配多种环境。
 
 ## 部署选型
 
@@ -59,6 +59,7 @@
 
 如果愿意用端口访问 code-server，简单的把 port 类型设置为 `NodePort` 就行：
 
+<!-- prettier-ignore -->
 ```yaml
 service:
   type: ClusterIP # => NodePort
@@ -67,6 +68,7 @@ service:
 
 我选择的是 ingress，因为优雅些，毕竟都用 k8s 了。
 
+<!-- prettier-ignore -->
 ```yaml
 ingress:
   enabled: true
@@ -108,6 +110,7 @@ password: 'somepassword'
 我当然不希望服务重启下、升级下、或者其他原因就把之前的文件、安装的各种 runtime 都干掉了，，，
 因此需要把容器中的内容持久化，作为个 volume 挂在 hostPath 上。
 
+<!-- prettier-ignore -->
 ```yaml
 persistence:
   enabled: true
@@ -164,10 +167,7 @@ Password: echo $(kubectl get secret --namespace default code-server -o jsonpath=
 
 ## 相关
 
-[我使用的 Helm Chart](https://github.com/shalldie/helm-charts/tree/master/code-server)
-
-[Github code-server](https://github.com/cdr/code-server)
-
-[Coder Docs](https://coder.com/docs/code-server/latest)
-
+[我使用的 Helm Chart](https://github.com/shalldie/helm-charts/tree/master/code-server) <br>
+[Github code-server](https://github.com/cdr/code-server) <br>
+[Coder Docs](https://coder.com/docs/code-server/latest) <br>
 [VSCode Online 的安裝与配置](https://zhuanlan.zhihu.com/p/342964881)

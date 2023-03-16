@@ -204,7 +204,7 @@ spec:
 
 ## 参考
 
-[k3s 安装选项介绍](https://docs.rancher.cn/docs/k3s/installation/install-options/_index)
-[如何在一台 1 核 1G 的服务器上部署 Kubernetes](https://gianthard.rocks/a/74)
-[一文搞懂 Traefik2.1 的使用](https://zhuanlan.zhihu.com/p/111267604)
+[k3s 安装选项介绍](https://docs.rancher.cn/docs/k3s/installation/install-options/_index) <br>
+[如何在一台 1 核 1G 的服务器上部署 Kubernetes](https://gianthard.rocks/a/74) <br>
+[一文搞懂 Traefik2.1 的使用](https://zhuanlan.zhihu.com/p/111267604) <br>
 [traefik-helm-chart](https://github.com/traefik/traefik-helm-chart)

@@ -12,5 +12,8 @@
   "files": [
     "blog"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.8.4"
+  }
 }

@@ -103,57 +103,57 @@
 
 ```ts
 class VNode {
-  key: string;
-  type: string;
-  data: IVNodeData;
-  children?: VNode[];
-  text?: string;
-  elm?: Element;
-  constructor(type: string, data?: IVNodeData, children?: VNode[], text?: string, elm?: Element);
-  /**
-   * 是否是 VNode
-   *
-   * @static
-   * @param {*} node 要判断的对象
-   * @returns {boolean}
-   * @memberof VNode
-   */
-  static isVNode(node: any): boolean;
-  /**
-   * 是否是可复用的 VNode 对象
-   * 判断依据是 key 跟 tagname 是否相同，既 对于相同类型dom元素尽可能复用
-   *
-   * @static
-   * @param {VNode} oldVnode
-   * @param {VNode} vnode
-   * @returns {boolean}
-   * @memberof VNode
-   */
-  static isSameVNode(oldVnode: VNode, vnode: VNode): boolean;
+    key: string;
+    type: string;
+    data: IVNodeData;
+    children?: VNode[];
+    text?: string;
+    elm?: Element;
+    constructor(type: string, data?: IVNodeData, children?: VNode[], text?: string, elm?: Element);
+    /**
+     * 是否是 VNode
+     *
+     * @static
+     * @param {*} node 要判断的对象
+     * @returns {boolean}
+     * @memberof VNode
+     */
+    static isVNode(node: any): boolean;
+    /**
+     * 是否是可复用的 VNode 对象
+     * 判断依据是 key 跟 tagname 是否相同，既 对于相同类型dom元素尽可能复用
+     *
+     * @static
+     * @param {VNode} oldVnode
+     * @param {VNode} vnode
+     * @returns {boolean}
+     * @memberof VNode
+     */
+    static isSameVNode(oldVnode: VNode, vnode: VNode): boolean;
 }
 
 export interface IVNodeData {
-  key?: string;
+    key?: string;
 
-  props?: IProps;
+    props?: IProps;
 
-  attrs?: IAttrs;
+    attrs?: IAttrs;
 
-  on?: IListener;
+    on?: IListener;
 
-  hook?: IVnodeHook;
+    hook?: IVnodeHook;
 
-  ns?: string;
+    ns?: string;
 }
 ```
 
-- `key` 是 VNode 在同一父节点下的唯一标识，主要用给业务层来决定是否复用 dom。
-- `type` 表示 `tagName`，表示节点的 tag 类型。
-- `data` 是 `IVNodeData` 类型，包含了 节点属性、节点状态、事件 等信息。
-- `children` 表示子节点数组，对应了真实 dom 中的 `childNodes`
-- `text` 表示 `textContent`
-- `elm` 对应了真实 dom 元素
-- `isVNode` 和 `isSameVNode` 是 VNode 相关的静态方法，作用见注释
+-   `key` 是 VNode 在同一父节点下的唯一标识，主要用给业务层来决定是否复用 dom。
+-   `type` 表示 `tagName`，表示节点的 tag 类型。
+-   `data` 是 `IVNodeData` 类型，包含了 节点属性、节点状态、事件 等信息。
+-   `children` 表示子节点数组，对应了真实 dom 中的 `childNodes`
+-   `text` 表示 `textContent`
+-   `elm` 对应了真实 dom 元素
+-   `isVNode` 和 `isSameVNode` 是 VNode 相关的静态方法，作用见注释
 
 ### h，生成 VNode 的工厂
 
@@ -188,13 +188,13 @@ function h(type: string, data?: IVNodeData, children?: VNode[]): VNode;
 export type TModuleHookFunc = (oldVnode: VNode, vnode: VNode) => void;
 
 export interface IModuleHook {
-  create?: TModuleHookFunc;
+    create?: TModuleHookFunc;
 
-  insert?: TModuleHookFunc;
+    insert?: TModuleHookFunc;
 
-  update?: TModuleHookFunc;
+    update?: TModuleHookFunc;
 
-  destroy?: TModuleHookFunc;
+    destroy?: TModuleHookFunc;
 }
 ```
 
@@ -202,39 +202,39 @@ export interface IModuleHook {
 
 ```ts
 export function updateAttrs(oldVnode: VNode, vnode: VNode): void {
-  let oldAttrs = oldVnode.data.attrs;
-  let attrs = vnode.data.attrs;
-  const elm = vnode.elm;
+    let oldAttrs = oldVnode.data.attrs;
+    let attrs = vnode.data.attrs;
+    const elm = vnode.elm;
 
-  // 两个vnode都不存在 attrs
-  if (!oldAttrs && !attrs) return;
-  // 两个 attrs 是相同的
-  if (oldAttrs === attrs) return;
+    // 两个vnode都不存在 attrs
+    if (!oldAttrs && !attrs) return;
+    // 两个 attrs 是相同的
+    if (oldAttrs === attrs) return;
 
-  oldAttrs = oldAttrs || {};
-  attrs = attrs || {};
+    oldAttrs = oldAttrs || {};
+    attrs = attrs || {};
 
-  // 更新 attrs
-  for (const key in attrs) {
-    const cur = attrs[key];
-    const old = oldAttrs[key];
-    // 相同就跳过
-    if (cur === old) continue;
-    // 不同就更新
-    elm.setAttribute(key, cur + '');
-  }
-
-  // 对于 oldAttrs 中有，而 attrs 没有的项，去掉
-  for (const key in oldAttrs) {
-    if (!(key in attrs)) {
-      elm.removeAttribute(key);
+    // 更新 attrs
+    for (const key in attrs) {
+        const cur = attrs[key];
+        const old = oldAttrs[key];
+        // 相同就跳过
+        if (cur === old) continue;
+        // 不同就更新
+        elm.setAttribute(key, cur + '');
     }
-  }
+
+    // 对于 oldAttrs 中有，而 attrs 没有的项，去掉
+    for (const key in oldAttrs) {
+        if (!(key in attrs)) {
+            elm.removeAttribute(key);
+        }
+    }
 }
 
 export const attrsModule: IModuleHook = {
-  create: updateAttrs,
-  update: updateAttrs
+    create: updateAttrs,
+    update: updateAttrs
 };
 ```
 
@@ -359,31 +359,31 @@ key 的特殊 attribute 主要用在 Vue 的虚拟 DOM 算法，在新旧 nodes 
 ```ts
 const oldMirror = oldChildren.slice(); // 用来表示哪些oldchildren被用过，位置信息等
 for (let i = 0; i < children.length; i++) {
-  // 当前vnode
-  const vnode = children[i];
-  // 可以被复用的vnode的索引
-  const oldVnodeIndex = oldMirror.findIndex(node => {
-    return node && VNode.isSameVNode(node, vnode);
-  });
-  // 如果有vnode可以复用
-  if (~oldVnodeIndex) {
-    // console.log(oldVnodeIndex);
-    const oldVnode = oldMirror[oldVnodeIndex];
+    // 当前vnode
+    const vnode = children[i];
+    // 可以被复用的vnode的索引
+    const oldVnodeIndex = oldMirror.findIndex(node => {
+        return node && VNode.isSameVNode(node, vnode);
+    });
+    // 如果有vnode可以复用
+    if (~oldVnodeIndex) {
+        // console.log(oldVnodeIndex);
+        const oldVnode = oldMirror[oldVnodeIndex];
 
-    // 把之前的置空，表示已经用过。之后仍然存留的要被删除
-    oldMirror[oldVnodeIndex] = undefined;
-    // 调整顺序（如果旧的索引对不上新索引）
-    if (oldVnodeIndex !== i) {
-      parentElm.insertBefore(oldVnode.elm, parentElm.childNodes[i + 1]);
+        // 把之前的置空，表示已经用过。之后仍然存留的要被删除
+        oldMirror[oldVnodeIndex] = undefined;
+        // 调整顺序（如果旧的索引对不上新索引）
+        if (oldVnodeIndex !== i) {
+            parentElm.insertBefore(oldVnode.elm, parentElm.childNodes[i + 1]);
+        }
+        // 比较数据,进行更新
+        // eslint-disable-next-line
+        patchVNode(oldVnode, vnode);
     }
-    // 比较数据,进行更新
-    // eslint-disable-next-line
-    patchVNode(oldVnode, vnode);
-  }
-  // 不能复用就创建新的
-  else {
-    addVnodes(parentElm, parentElm.childNodes[i + 1], [vnode]);
-  }
+    // 不能复用就创建新的
+    else {
+        addVnodes(parentElm, parentElm.childNodes[i + 1], [vnode]);
+    }
 }
 
 // 删除oldchildren中未被复用的部分
@@ -434,15 +434,15 @@ new:  |       |  |       |  |       |  |       |  |       |
 
 假设有 4 个索引，分别是：
 
-- `oldStartIndex`，指向 oldChildren 左边遍历到的节点
-- `oldEndIndex`，指向 oldChildren 右边遍历到的节点
-- `newStartIndex`，指向 newChildren 左边遍历到的节点
-- `newEndIndex`，指向 newChildren 左边遍历到的节点
+-   `oldStartIndex`，指向 oldChildren 左边遍历到的节点
+-   `oldEndIndex`，指向 oldChildren 右边遍历到的节点
+-   `newStartIndex`，指向 newChildren 左边遍历到的节点
+-   `newEndIndex`，指向 newChildren 左边遍历到的节点
 
 ```ts
 while (oldStartIndex <= oldEndIndex && newStartIndex <= newEndIndex) {
-  switch (true) {
-  }
+    switch (true) {
+    }
 }
 ```
 
@@ -579,8 +579,8 @@ new:     [2, 3, 1]
         break;
 ```
 
-- `oldChildren` 中俩指针中间的部分，属于没被复用的部分。
-- `newChildren` 中俩指针中间的部分，目前没能够找到可复用节点。
+-   `oldChildren` 中俩指针中间的部分，属于没被复用的部分。
+-   `newChildren` 中俩指针中间的部分，目前没能够找到可复用节点。
 
 对于 `newChildren` 的剩余部分，依次从 `oldChildren` 的剩余部分中去找可复用的节点，如果没找到，就生成一个新的去填充，`oldChildren` 里面如果某一项被复用，就给这个索引位置赋值 `undefined` 作为标记，下次循环直接跳过。
 
@@ -593,29 +593,29 @@ new:     [2, 3, 1]
 // 旧的 vnodes 遍历完，新的没有
 // 表示有新的没有添加完毕
 if (oldStartIndex > oldEndIndex && newStartIndex <= newEndIndex) {
-  addVnodes(parentElm, children[newEndIndex + 1]?.elm, children.slice(newStartIndex, newEndIndex + 1));
+    addVnodes(parentElm, children[newEndIndex + 1]?.elm, children.slice(newStartIndex, newEndIndex + 1));
 }
 // 新的 vnodes 遍历完，旧的没有
 // 表示有旧的没有删除干净
 else if (oldStartIndex <= oldEndIndex && newStartIndex > newEndIndex) {
-  removeVnodes(
-    parentElm,
-    oldChildren.slice(oldStartIndex, oldEndIndex + 1).filter(n => !!n)
-  );
+    removeVnodes(
+        parentElm,
+        oldChildren.slice(oldStartIndex, oldEndIndex + 1).filter(n => !!n)
+    );
 }
 ```
 
 这时候有 2 种情况需要处理一下：
 
-- `oldChildren` 遍历完， `newChildren` 没有。 表示旧节点都被复用了，还有部分新节点要重新生成。
-- `newChildren` 遍历完， `oldChildren` 没有。 表示新节点都已经生成完毕，旧节点中有一部分没用上，都需要删除。
+-   `oldChildren` 遍历完， `newChildren` 没有。 表示旧节点都被复用了，还有部分新节点要重新生成。
+-   `newChildren` 遍历完， `oldChildren` 没有。 表示新节点都已经生成完毕，旧节点中有一部分没用上，都需要删除。
 
 ## 相关链接
 
-[snabbdom][snabbdom]
-[A mini virtual dom lib. 一个轻量级的虚拟 dom 库][mini-vdom]
-[基于 virtual dom - mini-vdom 的轻量级 mvvm 库][mini-mvvm]
-[emmet][emmet]
+[snabbdom][snabbdom] <br>
+[A mini virtual dom lib. 一个轻量级的虚拟 dom 库][mini-vdom] <br>
+[基于 virtual dom - mini-vdom 的轻量级 mvvm 库][mini-mvvm] <br>
+[emmet][emmet] <br>
 [javascript 中的正则表达式][regex-in-javascript]
 
 [snabbdom]: https://github.com/snabbdom/snabbdom
