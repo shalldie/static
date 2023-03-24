@@ -1,5 +1,7 @@
 # 接下来要做的事情
 
+> <del>用 `next@13` 把 `nuxt@2` 重写了</del>
+
 > <del>添加 `vue-git-comment` 代理</del>
 
 > <del>接入 k3s</del>
