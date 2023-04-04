@@ -1,0 +1,7 @@
+{
+    "name": "fail-rm-cname-gistfile",
+    "title": "Github API v3 删除中文名 gist file 失败",
+    "cover": "assets/gistfilecover.png",
+    "publishTime": 1680578572241,
+    "labels": ["github"]
+}
