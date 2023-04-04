@@ -12,13 +12,13 @@
 
 > 肯定是我的问题，v3 都这么久了，有问题早修了，，，
 
-先看文档，分别验证了 `update`、`add`，中文也都 ok。
+先看文档，分别验证了 `update`、`add`，中文也都 ok。<br>
 因为删除部分并没有提到中文，demo 也没包含，于是猜测是一个隐藏特性，文档不健全。
 
-也看了一些知名库的源码比如 [google/go-github](https://github.com/google/go-github)，但其中并没提及这部分。
+也看了一些知名库的源码比如 [google/go-github](https://github.com/google/go-github)，但其中并没提及这部分。<br>
 在尝试了 urlencode 之后，我去 google 和 github 搜了挺久，，，无果，竟然之前没人遇到过吗？!!
 
-回来后把验证脚本换成 `shell curl`，再次复现。
+回来后把验证脚本换成 `shell curl`，再次复现。<br>
 确认无误后，给 github 提了个工单进行说明。没办法了搞不定，，，这是最后的波纹了
 
 ## github 的回复
@@ -52,6 +52,8 @@ curl -L \
   https://api.github.com/gists/GIST_ID \
   -d '{"files":{"中文.md":null}}'
 ```
+
+响应内容：
 
 ```json
 {
