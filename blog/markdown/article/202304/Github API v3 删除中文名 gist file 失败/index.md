@@ -69,6 +69,10 @@ curl -L \
 }
 ```
 
+## 修复
+
+在工单第一次回复我 `11天` 后，问题得到了修复，现在能正常的删除中文名文件。
+
 ## 参考
 
 https://docs.github.com/zh/rest/gists/gists?apiVersion=2022-11-28#update-a-gist
