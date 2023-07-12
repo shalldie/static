@@ -2,7 +2,7 @@
 
 为了这破博客陆陆续续写过一些库。
 
-分为两部分，`nestjs` 和 `nuxt`，使用 `lerna` 桥接两个项目使得目录和依赖都完全分离开。
+主体分为两部分，`服务层 - nestjs` 和 `视图层 - next`，依托于 docker 部署在 k3s 上。
 
 ## vue-git-comment
 
