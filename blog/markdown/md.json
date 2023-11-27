@@ -1,10 +1,10 @@
 {
     "recommendList": [
+        "coding-in-browser",
         "virtual-dom",
         "use-traefik",
         "k3s-in-1core1g",
         "vscode-background",
-        "yumi-miao",
-        "food-in-shanghai"
+        "yumi-miao"
     ]
 }
