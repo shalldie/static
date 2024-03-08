@@ -1,0 +1,8 @@
+{
+    "name": "tui-app",
+    "title": "运行在终端的应用",
+    "cover": "assets/cover.png",
+    "publishTime": 1709013160371,
+    "labels": ["golang", "tui"],
+    "edit": true
+}
