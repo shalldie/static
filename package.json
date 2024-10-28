@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "Repository for saving static files.",
   "main": "index.js",
-  "packageManager": "pnpm@9.9.0",
+  "packageManager": "pnpm@9.12.3",
   "private": true,
   "scripts": {
     "build": "pnpm -r run build",
